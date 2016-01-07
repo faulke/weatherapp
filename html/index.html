@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Weather App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/mystyle.css">
+    <script src="/js/script.js"></script>
+</head>
+<body id="body">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-4">
+      </div>
+      <div class="col-4 well">
+        <h1 id="location"></h1>
+        <div class="radio text-right">
+          <label>
+            <input type="radio" name="opt" id="faren" checked="checked">&degF</label>
+          <label>
+            <input type="radio" name="opt" id="cels">&degC</label>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-4"></div>
+      <div class="col-4 well">
+        <h2 id="display"></h2>
+        <img src="" alt="loading" id="iconMain">
+        <h2 id="temp">temp</h2>
+        <h2 id="wind">windspeed</h2>
+        <h2 id="humid">humidity</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4 well">
+        <h2 class="text-center" id="forecast">5 day Forecast</h2>
+        <div class="item-container">
+          <div class="text-center days">
+            <h4 id="day1"></h4>
+            <h3 id="temp1">temp</h3>
+            <img src="" alt="loading" class="iconSmall" id="icon1">
+            <h4 id="descript1">descript</h4>
+          </div>
+          <div class="temps">
+            <h4 id="hiTemp1">Hi temp</h4>
+            <h4 id="loTemp1">Lo temp</h4>
+          </div>
+        </div>
+        <div class="item-container">
+          <div class="text-center days">
+            <h4 id="day2"></h4>
+            <h3 id="temp2">temp</h3>
+            <img src="" alt="loading" class="iconSmall" id="icon2">
+            <h4 id="descript2">descript</h4>
+          </div>
+          <div class="temps">
+            <h4 id="hiTemp2">Hi temp</h4>
+            <h4 id="loTemp2">Lo temp</h4>
+          </div>
+        </div>
+        <div class="item-container">
+          <div class="text-center days">
+            <h4 id="day3"></h4>
+            <h3 id="temp3">temp</h3>
+            <img src="" alt="loading" class="iconSmall" id="icon3">
+            <h4 id="descript3">descript</h4>
+          </div>
+          <div class="temps">
+            <h4 id="hiTemp3">Hi temp</h4>
+            <h4 id="loTemp3">Lo temp</h4>
+          </div>
+        </div>
+        <div class="item-container">
+          <div class="text-center days">
+            <h4 id="day4"></h4>
+            <h3 id="temp4">temp</h3>
+            <img src="" alt="loading" class="iconSmall" id="icon4">
+            <h4 id="descript4">descript</h4>
+          </div>
+          <div class="temps">
+            <h4 id="hiTemp4">Hi temp</h4>
+            <h4 id="loTemp4">Lo temp</h4>
+          </div>
+        </div>
+        <div class="item-container">
+          <div class="text-center days">
+            <h4 id="day5"></h4>
+            <h3 id="temp5">temp</h3>
+            <img src="" alt="loading" class="iconSmall" id="icon5">
+            <h4 id="descript5">descript</h4>
+          </div>
+          <div class="temps">
+            <h4 id="hiTemp5">Hi temp</h4>
+            <h4 id="loTemp5">Lo temp</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
