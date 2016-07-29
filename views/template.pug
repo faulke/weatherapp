@@ -4,6 +4,47 @@ html
     link(rel="shortcut icon" href="")
     link(rel="stylesheet" type="text/css" href="../css/mystyle.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+    script(src="../js/script.js")
     title= title
   body
-    h1= message
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+      .navbar-header
+          button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+          a.navbar-brand(href="/weather") Weather App
+      .collapse.navbar-collapse
+          ul.nav.navbar-nav
+              li.active
+                  a(href="#") Home
+              li
+                  a(href="#about") About
+              li
+                  a(href="#contact") Contact
+    .container-fluid
+      .row.pad
+      .row.current-container
+        .col-3
+        .col-6.current-weather
+          .current-details
+            h1= weather.name
+          .current-extra
+        .col-3
+      .row.days-container
+        - for (var day in forecast.list){
+          a(href="/weather")
+            .item-container
+              .day-title
+                h4= forecast.list[day].dt
+              .day-details
+                .icon-container
+                  .icon-img
+                  .description
+                    h4= forecast.list[day].weather[0].description
+                .forecast-day-detail
+                  .hi-temp
+                  .low-temp
+              .more-details Details
+        - }
