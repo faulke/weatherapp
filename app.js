@@ -17,8 +17,9 @@ app.post('/action', require('./middleware.js'));
 app.get('/weather', (req, res) => {
   setTimeout(() => {
     const weather = req.app.settings.weatherData;
-    res.render('template', { title: 'Hey', message: weather.name });
-  }, 1000);
+    const forecast = req.app.settings.forecast;
+    res.render('template', { title: 'Hey', weather: weather, forecast: forecast });
+  }, 2000);
 });
 
 app.listen(3000, () => {
