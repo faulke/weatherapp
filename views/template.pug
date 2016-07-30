@@ -4,11 +4,12 @@ html
     link(rel="shortcut icon" href="")
     link(rel="stylesheet" type="text/css" href="../css/mystyle.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src="../js/script.js")
     title= title
   body
     .navbar.navbar-inverse.navbar-fixed-top
-      .container
+      .container-fluid
       .navbar-header
         button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
           span.icon-bar
@@ -16,13 +17,10 @@ html
           span.icon-bar
         a.navbar-brand(href="/weather") Weather App
       .collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li.active
-            a(href="#") Home
-          li
-            a(href="#about") About
-          li
-            a(href="#contact") Contact
+        form.navbar-form.navbar-right.right
+          .form-group
+            input(placeholder="City, ST")
+            button Search
     .container-fluid
       .row.pad
       .row.current-container
@@ -35,20 +33,23 @@ html
               .main-icon
                 h4.main-description= weather.weather[0].description
               .main-current-temp
-                h1.current-temp-text= weather.main.temp
+                h1.current-temp-text #{weather.main.temp} #[span &degF]
             .main-hi-temp
-              h4 hi:
-              h1= weather.main.temp_max
+              h4 Hi
+              h2 #{weather.main.temp_max} #[span &degF]
             .main-low-temp
-              h4 low:
-              h1= weather.main.temp_min
+              h4 Low
+              h2 #{weather.main.temp_min} #[span &degF]
           .current-extra
             .extra-container
-              - var arr = ['Wind','Pressure','Humidity','Sunrise','Sunset']
-              - for (i in arr) {
+              - var titles = ['Wind', 'Pressure', 'Humidity', 'Sunrise', 'Sunset']
+              - var data = [weather.wind.speed + ' MPH', weather.main.pressure, weather.main.humidity + ' %', weather.sys.sunrise, weather.sys.sunset]
+              - for (i in titles) {
                 .extra-detail
-                  h4= arr[i]
+                  .extra-info-title
+                    h4= titles[i]
                   .extra-detail-info
+                    h3.extra-info-text= data[i]
               - }
         .col-4
       .row.days-container
@@ -64,6 +65,9 @@ html
                     h4= forecast.list[day].weather[0].description
                 .forecast-day-detail
                   .hi-temp
+                    h4 Hi
+                    h3 #{forecast.list[day].temp.max} #[span &degF]
                   .low-temp
-              .more-details Details
+                    h4 Low
+                    h3 #{forecast.list[day].temp.min} #[span &degF]
         - }
