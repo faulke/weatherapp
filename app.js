@@ -18,6 +18,7 @@ app.get('/weather', (req, res) => {
   setTimeout(() => {
     const weather = req.app.settings.weatherData;
     const forecast = req.app.settings.forecast;
+    console.log(weather)
     res.render('template', { title: 'Hey', weather: weather, forecast: forecast });
   }, 2000);
 });
