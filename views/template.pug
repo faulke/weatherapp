@@ -10,28 +10,47 @@ html
     .navbar.navbar-inverse.navbar-fixed-top
       .container
       .navbar-header
-          button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-          a.navbar-brand(href="/weather") Weather App
+        button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="/weather") Weather App
       .collapse.navbar-collapse
-          ul.nav.navbar-nav
-              li.active
-                  a(href="#") Home
-              li
-                  a(href="#about") About
-              li
-                  a(href="#contact") Contact
+        ul.nav.navbar-nav
+          li.active
+            a(href="#") Home
+          li
+            a(href="#about") About
+          li
+            a(href="#contact") Contact
     .container-fluid
       .row.pad
       .row.current-container
-        .col-3
-        .col-6.current-weather
+        .col-4
+        .col-4.current-weather
           .current-details
-            h1= weather.name
+            .main-name
+              h1.title= weather.name
+            .main-weather
+              .main-icon
+                h4.main-description= weather.weather[0].description
+              .main-current-temp
+                h1.current-temp-text= weather.main.temp
+            .main-hi-temp
+              h4 hi:
+              h1= weather.main.temp_max
+            .main-low-temp
+              h4 low:
+              h1= weather.main.temp_min
           .current-extra
-        .col-3
+            .extra-container
+              - var arr = ['Wind','Pressure','Humidity','Sunrise','Sunset']
+              - for (i in arr) {
+                .extra-detail
+                  h4= arr[i]
+                  .extra-detail-info
+              - }
+        .col-4
       .row.days-container
         - for (var day in forecast.list){
           a(href="/weather")
