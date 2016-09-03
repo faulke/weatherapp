@@ -11,6 +11,10 @@ body {
   height: 70%;
 }
 
+.button-active{
+  background-color: green;
+}
+
 .icon-img {
   display: inline-block;
   height: 75%;
@@ -245,6 +249,11 @@ a:hover h4 {
   vertical-align: middle;
   margin: 0px;
   padding: 0px;
+}
+
+label {
+  margin-right: 3%;
+  margin-left: 3%;
 }
 
 .main-weather {
