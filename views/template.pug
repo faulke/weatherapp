@@ -2,10 +2,10 @@ html
   head
     link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', rel='stylesheet')
     link(rel="shortcut icon" href="")
-    link(rel="stylesheet" type="text/css" href="../css/mystyle.css")
+    link(rel="stylesheet" type="text/css" href="../../css/mystyle.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-    script(src="../js/script.js")
+    script(src="../../js/script.js")
     title= title
   body
     .navbar.navbar-inverse.navbar-fixed-top
@@ -30,16 +30,18 @@ html
             .main-name
               h1.title= weather.name
             .main-weather
+              button(id="faren" class="") &degF
+              button(id="cels" class="") &degC
               .main-icon
                 h4.main-description= weather.weather[0].description
               .main-current-temp
-                h1.current-temp-text #{weather.main.temp} #[span &degF]
+                h1.current-temp-text.temp #{weather.main.temp}
             .main-hi-temp
               h4 Hi
-              h2 #{weather.main.temp_max} #[span &degF]
+              h2.temp #{weather.main.temp_max}
             .main-low-temp
               h4 Low
-              h2 #{weather.main.temp_min} #[span &degF]
+              h2.temp #{weather.main.temp_min}
           .current-extra
             .extra-container
               - var titles = ['Wind', 'Pressure', 'Humidity', 'Sunrise', 'Sunset']
@@ -57,7 +59,7 @@ html
           a(href="/weather")
             .item-container
               .day-title
-                h4= forecast.list[day].dt
+                h4.forecastDay
               .day-details
                 .icon-container
                   .icon-img
@@ -66,8 +68,8 @@ html
                 .forecast-day-detail
                   .hi-temp
                     h4 Hi
-                    h3 #{forecast.list[day].temp.max} #[span &degF]
+                    h3.temp #{forecast.list[day].temp.max}
                   .low-temp
                     h4 Low
-                    h3 #{forecast.list[day].temp.min} #[span &degF]
+                    h3.temp #{forecast.list[day].temp.min}
         - }
