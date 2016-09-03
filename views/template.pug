@@ -45,13 +45,14 @@ html
           .current-extra
             .extra-container
               - var titles = ['Wind', 'Pressure', 'Humidity', 'Sunrise', 'Sunset']
+              - var ids = ['wind', 'pressure', 'humidity', 'sunrise', 'sunset']
               - var data = [weather.wind.speed + ' MPH', weather.main.pressure, weather.main.humidity + ' %', weather.sys.sunrise, weather.sys.sunset]
-              - for (i in titles) {
+              - for (i = 0; i < titles.length; i++) {
                 .extra-detail
                   .extra-info-title
                     h4= titles[i]
                   .extra-detail-info
-                    h3.extra-info-text= data[i]
+                    h3(id=ids[i]).extra-info-text= data[i]
               - }
         .col-4
       .row.days-container

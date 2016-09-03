@@ -17,7 +17,10 @@ $(document).ready(() => {
     }
   }
 
-  const oldSunrise = $('')
+//https://codepen.io/FreeCodeCamp/pen/KzXQgy
+
+  const oldSunrise = $('#sunrise').text();
+  console.log(oldSunrise);
 
   function kelvinToFaren(temp) {
     const dat = parseFloat(temp);
