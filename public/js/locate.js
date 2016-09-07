@@ -1,9 +1,19 @@
 $(document).ready(() => {
+  let lat;
+  let long;
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const long = position.coords.longitude;
-      window.location = `/weather/${lat}/${long}`;
+      if (position) {
+        console.log(position);
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        window.location = `/weather/${lat}/${long}`;
+      }
     });
   }
+  setTimeout(() => {
+    if (!lat || !long) {
+      window.location = '/weather';
+    }
+  }, 4000)
 });

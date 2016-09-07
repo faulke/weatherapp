@@ -12,9 +12,13 @@ app.use(express.static('public'));
 app.set('view engine', 'pug');
 
 app.get('/home', (req, res, next) => {
-  res.render('index.pug');
+  res.render('loading.pug');
   next();
 });
+
+app.get('/weather', (req, res) => {
+  res.render('index.pug');
+})
 
 app.get('/weather/:lat/:long', (req, res) => {
   const lat = req.params.lat;
@@ -31,7 +35,6 @@ app.get('/weather/:lat/:long', (req, res) => {
       }
     });
   }, (err, results) => {
-    console.log(results);
     if (results[0]['cod'] == 200) {
       res.render('template', { title: 'Weather', weather: results[0], forecast: results[1] })
     } else {
