@@ -13,6 +13,7 @@ body {
 
 .button-active{
   background-color: green;
+  color: white;
 }
 
 .icon-img {

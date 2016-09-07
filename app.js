@@ -17,7 +17,6 @@ app.get('/home', (req, res, next) => {
 });
 
 app.get('/weather/:lat/:long', (req, res) => {
-  console.log(req.params);
   const lat = req.params.lat;
   const long = req.params.long;
   const urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${apiKey}`,
@@ -32,7 +31,13 @@ app.get('/weather/:lat/:long', (req, res) => {
       }
     });
   }, (err, results) => {
-    res.render('template', { title: 'Weather', weather: results[0], forecast: results[1] })
+    console.log(results);
+    if (results[0]['cod'] == 200) {
+      res.render('template', { title: 'Weather', weather: results[0], forecast: results[1] })
+    } else {
+      res.render('index.pug');
+    }
+
   });
 });
 

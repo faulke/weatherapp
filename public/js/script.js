@@ -6,10 +6,10 @@ $(document).ready(() => {
   $('#faren').addClass('button-active');
 
   function setTime(time, suntime) {
-    const dateTime = time.parseInt(time, 10);
-    const newDate = new Date(dateTime * 1000)
-    const hours = newDate.getHours();
-    const minutes = newDate.getMinutes();
+    const dateTime = parseInt(time, 10);
+    const newDate = new Date(dateTime * 1000);
+    const hours = newDate.getHours() > 12 ? (newDate.getHours() - 12) : newDate.getHours();
+    const minutes = newDate.getMinutes() < 10 ? (`0${newDate.getMinutes()}`) : newDate.getMinutes();
     if (suntime === 'sunrise') {
       return `${hours}:${minutes} AM`;
     } else {
@@ -17,10 +17,16 @@ $(document).ready(() => {
     }
   }
 
-//https://codepen.io/FreeCodeCamp/pen/KzXQgy
+// https://codepen.io/FreeCodeCamp/pen/KzXQgy
 
   const oldSunrise = $('#sunrise').text();
-  console.log(oldSunrise);
+  $('#sunrise').html(setTime(oldSunrise, 'sunrise'));
+
+  const oldSunset = $('#sunset').text();
+  $('#sunset').html(setTime(oldSunset, 'sunset'));
+
+  const pressure = $('#pressure').text();
+  $('#pressure').html((parseInt(pressure, 10) / 25.4).toFixed(1));
 
   function kelvinToFaren(temp) {
     const dat = parseFloat(temp);
