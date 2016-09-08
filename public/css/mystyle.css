@@ -1,10 +1,34 @@
 body {
-  background-image: url('http://i820.photobucket.com/albums/zz130/faulkev/Codepen/05%20-%20Ni0vHRh_zps8jfrojuv.jpg');
+/*  background-image: url('http://i820.photobucket.com/albums/zz130/faulkev/Codepen/05%20-%20Ni0vHRh_zps8jfrojuv.jpg'); */
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+}
+
+/* loading spinner icon */
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .icon-container {
@@ -17,23 +41,20 @@ body {
 }
 
 .icon-img {
-  display: inline-block;
+  line-height: 3 !important;
   height: 75%;
-  width: 75%;
-  background-image: url('http://openweathermap.org/img/w/01n.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  font-size: 50px;
 }
 
 .main-icon {
-  display: table;
   width: 100%;
   height: 75%;
-  background-image: url('http://openweathermap.org/img/w/01n.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  font-size: 75px;
+}
+
+.main-image {
+  height: 75%;
+  line-height: 2 !important;
 }
 
 .main-current-temp {
@@ -42,10 +63,14 @@ body {
 }
 
 .main-description {
-  height: 100%;
-  display: table-cell;
-  vertical-align: bottom;
+  text-align: center;
+  width: 100%;
   padding: 4%;
+}
+
+.main-description h4 {
+  margin: auto;
+  display: block;
 }
 
 .current-temp-text {
