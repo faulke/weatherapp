@@ -13,7 +13,7 @@ $(document).ready(() => {
   }
   setTimeout(() => {
     if (!lat || !long) {
-      window.location = '/weather';
+      window.location = '/weather/38.90/-77.04'; // default to Washington DC
     }
   }, 4000)
 });
