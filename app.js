@@ -3,7 +3,7 @@ const request = require('request');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const keys = require('./config.json')
+const keys = require('./config.json');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -15,7 +15,6 @@ app.post('/search', (req, res) => {
   request.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.data}&key=${keys.google_api_key}`, (err, result, body) => {
     const data = JSON.parse(body);
     res.json(data);
-
   });
 });
 
@@ -26,7 +25,7 @@ app.get('/home', (req, res, next) => {
 
 app.get('/weather', (req, res) => {
   res.render('index.pug');
-})
+});
 
 app.get('/weather/:lat/:long', (req, res) => {
   const lat = req.params.lat;
@@ -44,11 +43,10 @@ app.get('/weather/:lat/:long', (req, res) => {
     });
   }, (err, results) => {
     if (results[0]['cod'] == 200) {
-      res.render('template', { title: 'Weather', weather: results[0], forecast: results[1] })
+      res.render('template', { title: 'Weather', weather: results[0], forecast: results[1] });
     } else {
       res.render('index.pug');
     }
-
   });
 });
 

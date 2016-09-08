@@ -18,6 +18,7 @@
   "homepage": "https://github.com/faulke/weatherapp#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "eslint": "^3.4.0",
     "eslint-config-airbnb": "^9.0.1",
     "express": "^4.14.0",
     "pug": "^2.0.0-beta4",
