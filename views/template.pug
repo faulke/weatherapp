@@ -36,6 +36,7 @@ html
               .main-icon
                 - var mainIcon = weather.weather[0].id
                 i(class="wi-owm-" + mainIcon).wi.main-image
+                input(type="hidden" id="icon" value=weather.weather[0].icon)
                 .main-description
                   h4= weather.weather[0].description
               .main-current-temp

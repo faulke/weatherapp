@@ -15,6 +15,29 @@ myApp.display = {
     $('#faren').prop('disabled', true);
     $('#faren').addClass('button-active');
   },
+  setBackground: () => {
+    const backgrounds = {
+      '01d': 'sunny.jpg',
+      '01n': 'clear-night.jpg',
+      '02d': 'partly-cloudy.jpg',
+      '02n': 'partly-cloudy-night.jpg',
+      '03d': 'partly-cloudy.jpg',
+      '03n': 'partly-cloudy-night.jpg',
+      '04d': 'cloudy.jpg',
+      '04n': 'cloudy-night.jpg',
+      '09d': 'rain.jpg',
+      '09n': 'rain-night.jpg',
+      '10d': 'rain.jpg',
+      '10n': 'rain-night.jpg',
+      '11d': 'lightning.jpg',
+      '13d': 'snow.gif',
+      '50d': 'heavy-fog.jpg',
+      '50n': 'heavy-fog.jpg',
+    };
+    const icon = $('#icon').val();
+    console.log(`url(../images/${backgrounds[icon]})`);
+    $('body').css('background-image', `url(../../images/${backgrounds[icon]})`);
+  },
   setDays: () => {
     const titles = $('.forecastDay');
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -44,9 +67,6 @@ myApp.display = {
       const newTemp = myApp.helpers.kelvinToFaren(temp);
       $(temps[i]).text(`${newTemp} ${String.fromCharCode(176)}F`);
     }
-  },
-  setBackground: () => {
-
   },
 };
 
