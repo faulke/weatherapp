@@ -16,7 +16,6 @@ html
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href="/weather") Weather App
       .collapse.navbar-collapse
         form(onsubmit="myApp.actions.search()").navbar-form.navbar-right.right
           .form-group
@@ -31,8 +30,9 @@ html
             .main-name
               h1.title= weather.name
             .main-weather
-              button(id="faren" class="" onClick="myApp.actions.selectButton(this.id)") &degF
-              button(id="cels" class="" onClick="myApp.actions.selectButton(this.id)") &degC
+              .btn-container
+                button(id="faren" class="" onClick="myApp.actions.selectButton(this.id)") &degF
+                button(id="cels" class="" onClick="myApp.actions.selectButton(this.id)") &degC
               .main-icon
                 - var mainIcon = weather.weather[0].id
                 i(class="wi-owm-" + mainIcon).wi.main-image
