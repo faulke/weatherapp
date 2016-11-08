@@ -9,18 +9,30 @@ html
     script(src="../../js/script.js")
     title= title
   body
+    #myModal.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header Extra details for Day
+          .modal-body Extra day details
+          .modal-footer Next and back buttons
     .navbar.navbar-inverse.navbar-fixed-top
       .container-fluid
-      .navbar-header
-        button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-      .collapse.navbar-collapse
-        form(onsubmit="myApp.actions.search()").navbar-form.navbar-right.right
-          .form-group
-            input(placeholder="City, ST")
-            button Search
+        .navbar-header
+          button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          .navbar-brand Missoula Cloudy (Icon) 54F
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-left
+            li
+              a(href="/home") Home
+          ul.nav.navbar-nav.navbar-right
+            li
+              form(onsubmit="myApp.actions.search()").navbar-form
+                .form-group
+                  input(placeholder="City, ST")
+                  button Search
     .container-fluid
       .row.pad
       .row.current-container
@@ -62,7 +74,7 @@ html
         .col-4
       .row.days-container
         - for (var day in forecast.list){
-          a(href="")
+          a(href="" data-toggle="modal" data-target="#myModal")
             .item-container
               .day-title
                 h4.forecastDay
