@@ -1,9 +1,12 @@
 const async = require('async');
 const request = require('request');
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const keys = require('./config.json');
+
+const googleKey = keys.google_api_key || process.env.GOOGLE_KEY;
+const weatherKey = keys.openweathermap_api_key || process.env.WEATHER_KEY;
+const app = express();
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -12,13 +15,13 @@ app.use(express.static('public'));
 app.set('view engine', 'pug');
 
 app.post('/search', (req, res) => {
-  request.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.data}&key=${keys.google_api_key}`, (err, result, body) => {
+  request.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.data}&key=${googleKey}`, (err, result, body) => {
     const data = JSON.parse(body);
     res.json(data);
   });
 });
 
-app.get('/home', (req, res, next) => {
+app.get('/', (req, res, next) => {
   res.render('loading.pug');
   next();
 });
@@ -30,8 +33,8 @@ app.get('/weather', (req, res) => {
 app.get('/weather/:lat/:long', (req, res) => {
   const lat = req.params.lat;
   const long = req.params.long;
-  const urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${keys.openweathermap_api_key}`,
-                `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&cnt=5&APPID=${keys.openweathermap_api_key}`];
+  const urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${weatherKey}`,
+                `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&cnt=5&APPID=${weatherKey}`];
 
   async.map(urls, (url, callback) => {
     request(url, (err, response, body) => {
