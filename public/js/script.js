@@ -31,8 +31,8 @@ myApp.display = {
       '10n': 'rain-night.jpg',
       '11d': 'lightning.jpg',
       '13d': 'snow.gif',
-      '50d': 'heavy-fog.jpg',
-      '50n': 'heavy-fog.jpg',
+      '50d': 'heavy-fog.gif',
+      '50n': 'heavy-fog.gif',
     };
     const icon = $('#icon').val();
     console.log(`url(../images/${backgrounds[icon]})`);
