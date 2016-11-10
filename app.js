@@ -26,6 +26,10 @@ app.get('/', (req, res, next) => {
   next();
 });
 
+app.get('/home', (req, res) => {
+  res.render('home.pug');
+});
+
 app.get('/weather', (req, res) => {
   res.render('index.pug');
 });
@@ -46,7 +50,7 @@ app.get('/weather/:lat/:long', (req, res) => {
     });
   }, (err, results) => {
     if (results[0]['cod'] == 200) {
-      res.render('template', { title: 'Weather', weather: results[0], forecast: results[1] });
+      res.render('index.pug', { title: 'Weather', weather: results[0], forecast: results[1] });
     } else {
       res.render('index.pug');
     }
