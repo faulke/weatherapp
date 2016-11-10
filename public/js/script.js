@@ -3,10 +3,12 @@
 const myApp = {
   initialize: () => {
     myApp.display.setButton();
-    myApp.display.setBackground();
     myApp.display.setDays();
     myApp.display.setTimes();
     myApp.display.convertValues();
+    if ($('body').hasClass('location-weather')) {
+      myApp.display.setBackground();
+    }
   },
 };
 
@@ -35,7 +37,6 @@ myApp.display = {
       '50n': 'heavy-fog.gif',
     };
     const icon = $('#icon').val();
-    console.log(`url(../images/${backgrounds[icon]})`);
     $('body').css('background-image', `url(../../images/${backgrounds[icon]})`);
   },
   setDays: () => {
@@ -119,13 +120,20 @@ myApp.actions = {
       $('#cels').removeClass('button-active');
     }
   },
-  search: () => {
+  search: (e) => {
+    e.preventDefault();
     const input = $('form input').val();
-    $.post('http://localhost:3000/search', { data: input }, (response) => {
+    const btn = $('form button');
+    if (!input) {
+      return false;
+    }
+    $(btn).button().button('loading');
+    $.post('/search', { data: input }, (response) => {
       const lat = response.results[0].geometry.location.lat;
       const long = response.results[0].geometry.location.lng;
       window.location = `/weather/${lat}/${long}`;
     });
+    return false;
   },
 };
 
