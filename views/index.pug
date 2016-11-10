@@ -26,10 +26,10 @@ html
         .collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-left
             li
-              a(href="/") Home
+              a(href="/home") Home
           ul.nav.navbar-nav.navbar-right
             li
-              form(onsubmit="myApp.actions.search()").navbar-form
+              form(onsubmit="myApp.actions.search(event)").navbar-form
                 .form-group
                   input(placeholder="City, ST")
                   button Search
