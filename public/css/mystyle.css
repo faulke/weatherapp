@@ -146,12 +146,11 @@ body {
 }
 
 .navbar-brand {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    margin: auto;
+  left: 0;
+  margin: auto !important;
+  position: absolute;
+  right: 0;
+  width: 290px;
 }
 
 .navbar-toggle {
@@ -194,7 +193,7 @@ a:hover h4 {
 }
 
 .container-fluid{
-
+  position: relative;
   height: 100%;
   text-align: center;
 }
@@ -364,6 +363,10 @@ h2 {
   height: 90%;
 }
 
+h3 {
+  font-size: 18px;
+}
+
 /**** HOME PAGE *****/
 #search {
   bottom: 0;
@@ -489,5 +492,11 @@ h2 {
   }
   .navbar-collapse .navbar-right {
     margin:auto;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .navbar-brand {
+    right: 30%;
   }
 }
