@@ -4,7 +4,6 @@ $(document).ready(() => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       if (position) {
-        console.log(position);
         lat = position.coords.latitude;
         long = position.coords.longitude;
         window.location = `/weather/${lat}/${long}`;
@@ -13,7 +12,7 @@ $(document).ready(() => {
   }
   setTimeout(() => {
     if (!lat || !long) {
-      window.location = '/weather/38.90/-77.04'; // default to Washington DC
+      window.location = '/home'; // default to search screen
     }
   }, 4000);
 });
