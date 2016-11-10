@@ -8,7 +8,7 @@ html
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src="../../js/script.js")
     title= title
-  body
+  body.location-weather
     #myModal.modal.fade
       .modal-dialog
         .modal-content
@@ -22,7 +22,7 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          .navbar-brand Missoula Cloudy (Icon) 54F
+          .navbar-brand Albequerque Cloudy (Icon) 54F
         .collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-left
             li
@@ -31,8 +31,9 @@ html
             li
               form(onsubmit="myApp.actions.search(event)").navbar-form
                 .form-group
-                  input(placeholder="City, ST")
-                  button Search
+                  input(class="form-control" placeholder="City, ST")
+                  button(class="btn btn-primary" data-loading-text="Searching...") Search &nbsp&nbsp
+                    span.glyphicon.glyphicon-search
     .container-fluid
       .row.pad
       .row.current-container
