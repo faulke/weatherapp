@@ -1,4 +1,6 @@
 // https://codepen.io/FreeCodeCamp/pen/KzXQgy
+/* eslint-env jquery */
+/* global document, navigator, window */
 
 const myApp = {
   initialize: () => {
@@ -63,7 +65,7 @@ myApp.display = {
 
     const temps = $('.temp');
     let i;
-    for (i = 0; i < temps.length; i++) {
+    for (i = 0; i < temps.length; i += 1) {
       const temp = $(temps[i]).html();
       const newTemp = myApp.helpers.kelvinToFaren(temp);
       $(temps[i]).text(`${newTemp} ${String.fromCharCode(176)}F`);
@@ -100,7 +102,7 @@ myApp.actions = {
   selectButton: (id) => {
     const temps = $('.temp');
     let i;
-    for (i = 0; i < temps.length; i++) {
+    for (i = 0; i < temps.length; i += 1) {
       const dig = $(temps[i]).html();
       const temp = dig.match(/\d/g).join('');
       const newTemp = id === 'cels' ?

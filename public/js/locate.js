@@ -1,3 +1,6 @@
+/* eslint-env jquery */
+/* global document, navigator, window */
+
 $(document).ready(() => {
   let lat;
   let long;
