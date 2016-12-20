@@ -1,9 +1,7 @@
 // This component handles the App template used on every page.
 import React, { PropTypes } from 'react';
-import WeatherApi from '../api/mockWeather';
 
 class App extends React.Component {
-
   render() {
     return (
       <div className="container-fluid">
