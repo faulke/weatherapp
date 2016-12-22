@@ -39,7 +39,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <Search value={this.state.value} onSubmit={this.submitForm} onChange={this.handleChange} />
+        <Search value={this.state.value} onSubmit={this.submitForm} />
       </div>
     ); // if no location, this is fired and only search component is present
   }
