@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
+import Navbar from '../common/Navbar';
 import WeatherApi from '../../api/weatherApi';
 import Search from '../home/Search';
 
@@ -37,23 +38,28 @@ class CurrentWeather extends React.Component {
       if (!err && data.results.length) {
         const lat = data.results[0].geometry.location.lat;
         const long = data.results[0].geometry.location.lng;
-        this.setState({ 
+        this.state = {
           location: {
             lat,
             long,
           },
-        });
+        };
         this.getWeather();
+     //   browserHistory.push(`/${lat}/${long}`); // change url with input to render weather component
       }
     });
   }
 
   render() {
     return (
-      <div className="jumbotron">
-        <Search value={this.state.value} onSubmit={this.submitForm} onChange={this.handleChange} />
-        <h1>Weather</h1>
-        {this.state.now.name}
+      <div>
+        <Navbar value={this.state.search} onSubmit={this.submitForm} onChange={this.handleChange} />
+        <div className="container-fluid">
+          <div className="jumbotron">
+            <h1>Weather</h1>
+            {this.state.now.name}
+          </div>
+        </div>
       </div>
     );
   }
