@@ -7,8 +7,8 @@ const googleKey = process.env.GOOGLE_KEY;
 class WeatherApi {
   static getWeather(lat, long, cb) {
     const urls = [
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${weatherKey}`,
-      `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&cnt=5&APPID=${weatherKey}`];
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=${weatherKey}`,
+      `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&cnt=5&units=imperial&APPID=${weatherKey}`];
 
     async.map(urls, (url, callback) => {
       request({
