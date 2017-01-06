@@ -56,10 +56,10 @@ html
                 h1.current-temp-text.temp #{weather.main.temp}
             .main-hi-temp
               h4 Hi
-              h2.temp #{weather.main.temp_max}
+              h2.temp #{forecast.list[0].temp.max}
             .main-low-temp
               h4 Low
-              h2.temp #{weather.main.temp_min}
+              h2.temp #{forecast.list[0].temp.min}
           .current-extra
             .extra-container
               - var titles = ['Wind', 'Pressure', 'Humidity', 'Sunrise', 'Sunset']
@@ -74,22 +74,22 @@ html
               - }
         .col-4
       .row.days-container
-        - for (var day in forecast.list){
+        - for (var i = 1; i < forecast.list.length; i++){
           a(href="" data-toggle="modal" data-target="#myModal")
             .item-container
               .day-title
                 h4.forecastDay
               .day-details
                 .icon-container
-                  - var icon = forecast.list[day].weather[0].id
+                  - var icon = forecast.list[i].weather[0].id
                   i(class="wi-owm-" + icon).wi.icon-img
                   .description
-                    h4= forecast.list[day].weather[0].description
+                    h4= forecast.list[i].weather[0].description
                 .forecast-day-detail
                   .hi-temp
                     h4 Hi
-                    h3.temp #{forecast.list[day].temp.max}
+                    h3.temp #{forecast.list[i].temp.max}
                   .low-temp
                     h4 Low
-                    h3.temp #{forecast.list[day].temp.min}
+                    h3.temp #{forecast.list[i].temp.min}
         - }
