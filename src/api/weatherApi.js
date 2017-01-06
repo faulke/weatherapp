@@ -1,8 +1,8 @@
 import async from 'async';
 import request from 'request';
 
-const weatherKey = 'weather_key';
-const googleKey = 'google_key';
+const weatherKey = process.env.WEATHER_KEY;
+const googleKey = process.env.GOOGLE_KEY;
 
 class WeatherApi {
   static getWeather(lat, long, cb) {

@@ -7,7 +7,6 @@ import path from 'path';
 import open from 'open';
 import config from '../webpack.config.dev';
 
-const googleKey = process.env.GOOGLE_KEY;
 const port = process.env.PORT || 3000;
 const app = express();
 const compiler = webpack(config);

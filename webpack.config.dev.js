@@ -1,5 +1,8 @@
 import webpack from 'webpack';
 import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default {
   debug: true,
@@ -27,11 +30,10 @@ export default {
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
     }),
-    
     new webpack.DefinePlugin({
       'process.env': {
-        'WEATHER_KEY': JSON.stringify(process.env.WEATHER_KEY),
-        'GOOGLE_KEY': JSON.stringify(process.env.GOOGLE_KEY),
+        'WEATHER_KEY': `"${process.env.WEATHER_KEY}"`,
+        'GOOGLE_KEY': `"${process.env.GOOGLE_KEY}"`,
       },
     }),
   ],
