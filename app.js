@@ -2,10 +2,10 @@ const async = require('async');
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
-const keys = require('./config.json');
+require('dotenv').config();
 
-const googleKey = keys.google_api_key || process.env.GOOGLE_KEY;
-const weatherKey = keys.openweathermap_api_key || process.env.WEATHER_KEY;
+const googleKey = process.env.GOOGLE_KEY;
+const weatherKey = process.env.WEATHER_KEY;
 const app = express();
 
 app.use(bodyParser.json()); // support json encoded bodies
@@ -37,8 +37,8 @@ app.get('/weather', (req, res) => {
 app.get('/weather/:lat/:long', (req, res) => {
   const lat = req.params.lat;
   const long = req.params.long;
-  const urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${weatherKey}`,
-                `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&cnt=5&APPID=${weatherKey}`];
+  const urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=${weatherKey}`,
+                `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&units=imperial&cnt=6&APPID=${weatherKey}`];
 
   async.map(urls, (url, callback) => {
     request(url, (err, response, body) => {
