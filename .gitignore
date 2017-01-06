@@ -2,3 +2,5 @@ node_modules
 .eslintrc.json
 config.json
 .eslintrc
+.env
+.vscode/settings.json
