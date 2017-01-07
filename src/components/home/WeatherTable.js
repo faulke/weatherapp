@@ -1,32 +1,20 @@
 import React from 'react';
-import WeatherApi from '../../api/weatherApi';
 import { Table } from 'react-bootstrap';
+import WeatherApi from '../../api/weatherApi';
+
 // TODO: implement google autocomplete for addresses
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
-
-  }
-
-  componentDidMount() {
-
-  }
-
+class WeatherTable extends React.Component {
   render() {
     return (
       <Table bordered condensed hover>
         <tbody>
-          <tr><td>City 1 (icon) temp</td></tr>
-          <tr><td>City 2 (icon) temp</td></tr>
+          {
+            this.props.weather.map(x => <tr key={x.id}><td>{x.name}</td></tr>)
+          }
         </tbody>
       </Table>
     );
   }
 }
 
-Search.propTypes = {
-  onSubmit: React.PropTypes.func.isRequired,
-};
-
-export default Search;
+export default WeatherTable;
