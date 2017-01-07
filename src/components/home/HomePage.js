@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import WeatherApi from '../../api/weatherApi';
 import CurrentWeather from '../weather/CurrentWeather';
 import Search from './Search';
+import WeatherTable from './WeatherTable';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -11,37 +12,28 @@ class HomePage extends React.Component {
     this.state = { value: '' };
     this.submitForm = this.submitForm.bind(this);
   }
-  
-  componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        if (position) {
-          const lat = position.coords.latitude;
-          const long = position.coords.longitude;
-          browserHistory.push(`/${lat}/${long}`); // if location, change url to render weather component
-        }
-      });
-    }
-  }
 
   submitForm(evt, search) { // TODO: move this to it's own module
     evt.preventDefault();
     
-    WeatherApi.searchWeather(search.value, (err, data) => {
+    WeatherApi.searchWeather('address', search.value, (err, data) => {
       if (!err && data.results.length) {
         const lat = data.results[0].geometry.location.lat;
         const long = data.results[0].geometry.location.lng;
         browserHistory.push(`/${lat}/${long}`); // change url with input to render weather component
-      }
+      } // TODO: Add error handling (e.g., "That location doesn't exist...try another")
     });
   }
 
+// TODO: render weather table with 3 default cities, icon, and temp
+// TODO later: user can save 3 specific locations that pop up when logged in
   render() {
     return (
       <div className="container-fluid">
-        <Search value={this.state.value} onSubmit={this.submitForm} />
+        <Search onSubmit={this.submitForm} />
+        <WeatherTable />
       </div>
-    ); // if no location, this is fired and only search component is present
+    );
   }
 }
 
