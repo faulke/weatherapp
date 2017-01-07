@@ -7,6 +7,7 @@ import WeatherPage from './components/weather/CurrentWeather';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
+    <Route path="home" component={HomePage} />
     <Route path=":lat/:long" component={WeatherPage} />
   </Route>
 );
