@@ -34,18 +34,18 @@ class CurrentWeather extends React.Component {
   submitForm(evt, search) {
     evt.preventDefault();
     
-    WeatherApi.searchWeather(search.value, (err, data) => {
+    WeatherApi.searchWeather('address', search.value, (err, data) => {
       if (!err && data.results.length) {
         const lat = data.results[0].geometry.location.lat;
         const long = data.results[0].geometry.location.lng;
-        this.state = {
+        this.setState({
           location: {
             lat,
             long,
           },
-        };
-        this.getWeather();
-     //   browserHistory.push(`/${lat}/${long}`); // change url with input to render weather component
+        }, () => {
+          this.getWeather();
+        });
       }
     });
   }
