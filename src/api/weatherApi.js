@@ -30,9 +30,9 @@ class WeatherApi {
     });
   }
   
-  static searchWeather(search, cb) {
+  static searchWeather(type, search, cb) {
     const self = this;
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${search}&key=${googleKey}`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?${type}=${search}&key=${googleKey}`;
     request.get({
       url,
       withCredentials: false,
@@ -40,8 +40,7 @@ class WeatherApi {
       if (err) {
         cb(err);
       } else {
-        const data = JSON.parse(body);
-        cb(null, data);
+        cb(null, JSON.parse(body));
       }
     });
   }
