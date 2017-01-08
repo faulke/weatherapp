@@ -9,7 +9,7 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+// TODO: these can just be props and handled in the container
   handleSubmit(evt) {
     this.props.onSubmit(evt);
     evt.preventDefault();
