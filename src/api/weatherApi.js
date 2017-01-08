@@ -29,6 +29,29 @@ class WeatherApi {
       }
     });
   }
+
+  static getWeatherMultiple(locations, cb) {
+    const urls = locations.map(x => `http://api.openweathermap.org/data/2.5/weather?lat=${x.lat}&lon=${x.long}&units=imperial&APPID=${weatherKey}`);
+
+    async.map(urls, (url, callback) => {
+      request({
+        url,
+        withCredentials: false,
+      }, (err, response, body) => {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, JSON.parse(body));
+        }
+      });
+    }, (err, results) => {
+      if (!err && results[0].cod === 200) {
+        cb(null, results);
+      } else {
+        cb(err);
+      }
+    });
+  }
   
   static searchWeather(type, search, cb) {
     const self = this;
