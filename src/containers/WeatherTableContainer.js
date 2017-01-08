@@ -9,6 +9,8 @@ class WeatherTableContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { weather: null };
+
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -17,13 +19,14 @@ class WeatherTableContainer extends Component {
     });
   }
 
-  handleClick() {
-    // get lat long attributes for city and browserHistory.push new url
+  handleItemClick(evt) {
+    const url = evt.target.attributes['data-href'].value;
+    browserHistory.push(url);
   }
 
   render() {
     const table = this.state.weather ?
-      <WeatherTable weather={this.state.weather} onClick={this.handleClick} /> :
+      <WeatherTable weather={this.state.weather} onClick={this.handleItemClick} /> :
       <div />;
     return (
       table
