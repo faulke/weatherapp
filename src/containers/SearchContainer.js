@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import WeatherApi from '../api/weatherApi';
-import Search from '../components/home/Search';
+import Search from '../components/common/Search';
 
 // TODO: implement google autocomplete for addresses
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { city: this.props.city };
+    this.state = { city: '' };
 
     this.submitForm = this.submitForm.bind(this);
     this.updateInput = this.updateInput.bind(this);
@@ -30,7 +30,7 @@ class SearchContainer extends Component {
 
   render() {
     return (
-      <Search value={this.state.city} onSubmit={this.submitForm} onChange={this.updateInput} />
+      <Search value={this.state.city} onSubmit={this.submitForm} onChange={this.updateInput} size={this.props.size} />
     );
   }
 }

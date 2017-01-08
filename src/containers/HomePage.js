@@ -9,7 +9,6 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputCity: '',
       tableCities: null,
     };
   }
@@ -24,7 +23,6 @@ class HomePage extends React.Component {
             for (let i = 0; i < data.results.length; i += 1) {
               if (data.results[i].types.indexOf('locality') > -1) {
                 this.setState({
-                  inputCity: data.results[i].formatted_address,
                   tableCities: this.setWeatherTable({ lat, long }),
                 });
                 break;
@@ -51,7 +49,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <SearchContainer city={this.state.inputCity} />
+        <SearchContainer size="50" />
         <WeatherTableContainer cities={this.state.tableCities} />
       </div>
     );

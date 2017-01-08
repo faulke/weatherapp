@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
 import Navbar from '../common/Navbar';
 import WeatherApi from '../../api/weatherApi';
-import Search from '../home/Search';
 
 class CurrentWeather extends React.Component {
   constructor(props) {
@@ -16,11 +15,21 @@ class CurrentWeather extends React.Component {
       forecast: {},
     };
     this.getWeather = this.getWeather.bind(this);
-    this.submitForm = this.submitForm.bind(this);
   }
 
   componentWillMount() {
     this.getWeather();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      location: {
+        lat: nextProps.params.lat,
+        long: nextProps.params.long,
+      },
+    }, () => {
+      this.getWeather();
+    });
   }
 
   getWeather() {
@@ -31,29 +40,10 @@ class CurrentWeather extends React.Component {
     });
   }
 
-  submitForm(evt, search) {
-    evt.preventDefault();
-    
-    WeatherApi.searchWeather('address', search.value, (err, data) => {
-      if (!err && data.results.length) {
-        const lat = data.results[0].geometry.location.lat;
-        const long = data.results[0].geometry.location.lng;
-        this.setState({
-          location: {
-            lat,
-            long,
-          },
-        }, () => {
-          this.getWeather();
-        });
-      }
-    });
-  }
-
   render() {
     return (
       <div>
-        <Navbar value={this.state.search} onSubmit={this.submitForm} onChange={this.handleChange} />
+        <Navbar />
         <div className="container-fluid">
           <div className="jumbotron">
             <h1>Weather</h1>
