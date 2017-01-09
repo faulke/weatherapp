@@ -1,30 +1,30 @@
 import React from 'react';
 import { Link, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import SearchContainer from '../../containers/SearchContainer';
 
-class navbarInstance extends React.Component {
-
+const NavbarInstance = (props) => {
 // TODO: add linkcontainer for Home
-  render() {
-    return (
-      <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Toggle />
-          <Navbar.Brand>
-            Orchard Homes (icon) temp
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullLeft>
+  return (
+    <Navbar inverse collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Toggle />
+        <Navbar.Brand>
+          Orchard Homes (icon) temp
+        </Navbar.Brand>
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav pullLeft>
+          <LinkContainer to="/home">
             <NavItem>
               Home
             </NavItem>
-          </Nav>
-          <SearchContainer />
-        </Navbar.Collapse>
-      </Navbar>
-    );
-  }
-}
+          </LinkContainer>
+        </Nav>
+        <SearchContainer />
+      </Navbar.Collapse>
+    </Navbar>
+  );
+};
 
-export default navbarInstance;
+export default NavbarInstance;
