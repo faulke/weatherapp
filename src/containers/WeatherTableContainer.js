@@ -5,11 +5,15 @@ import WeatherTable from '../components/home/WeatherTable';
 
 // TODO: implement google autocomplete for addresses
 class WeatherTableContainer extends Component {
+  
+  static handleItemClick(evt) {
+    const url = evt.target.attributes['data-href'].value;
+    browserHistory.push(url);
+  }
+
   constructor(props) {
     super(props);
     this.state = { weather: null };
-
-    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   componentWillMount() {
@@ -24,11 +28,6 @@ class WeatherTableContainer extends Component {
     });
   }
 
-  handleItemClick(evt) {
-    const url = evt.target.attributes['data-href'].value;
-    browserHistory.push(url);
-  }
-
   render() {
     if (!this.state.weather) {
       return false;  // or return loader
@@ -38,5 +37,9 @@ class WeatherTableContainer extends Component {
     );
   }
 }
+
+WeatherTableContainer.propTypes = {
+  cities: React.PropTypes.array.isRequired,
+};
 
 export default WeatherTableContainer;

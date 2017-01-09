@@ -28,4 +28,10 @@ const NavbarInstance = (props) => {
   );
 };
 
+NavbarInstance.propTypes = {
+  icon: React.PropTypes.number.isRequired,
+  city: React.PropTypes.string.isRequired,
+  temp: React.PropTypes.number.isRequired,
+};
+
 export default NavbarInstance;
