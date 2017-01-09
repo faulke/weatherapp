@@ -10,7 +10,19 @@ const WeatherTable = ({ weather, onClick }) => {
         {
           weather.map((x) => {
             const url = `${x.coord.lat}/${x.coord.lon}`;
-            return <tr key={x.id}><td data-href={url} onClick={onClick}>{x.name}</td></tr>;
+            const icon = `wi wi-owm-${x.weather[0].id}`;
+            const temp = Math.round(x.main.temp);
+            return (
+              <tr key={x.id}>
+                <td data-href={url} onClick={onClick}>
+                  <span>{x.name}</span>
+                  {' '}
+                  <i className={icon} />
+                  {' '}
+                  <span>{temp}&deg;F</span>
+                </td>
+              </tr>
+            );
           })
         }
       </tbody>
