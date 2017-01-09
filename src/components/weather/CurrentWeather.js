@@ -11,8 +11,8 @@ class CurrentWeather extends React.Component {
         lat: this.props.params.lat,
         long: this.props.params.long,
       },
-      now: {},
-      forecast: {},
+      now: null,
+      forecast: null,
     };
     this.getWeather = this.getWeather.bind(this);
   }
@@ -41,13 +41,19 @@ class CurrentWeather extends React.Component {
   }
 
   render() {
+    if (!this.state.now) {
+      return false;
+    }
+    const city = this.state.now.name;
+    const temp = Math.round(this.state.now.main.temp);
+    const icon = this.state.now.weather[0].id;
     return (
       <div>
-        <Navbar />
+        <Navbar temp={temp} city={city} icon={icon} />
         <div className="container-fluid">
           <div className="jumbotron">
             <h1>Weather</h1>
-            {this.state.now.name}
+            {city}
           </div>
         </div>
       </div>
