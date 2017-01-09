@@ -9,7 +9,11 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableCities: null,
+      table: [
+        { lat: 54, long: 112 },
+        { lat: 45, long: 113 },
+        { lat: 47, long: 113 },
+      ],
     };
   }
 
@@ -23,7 +27,7 @@ class HomePage extends React.Component {
             for (let i = 0; i < data.results.length; i += 1) {
               if (data.results[i].types.indexOf('locality') > -1) {
                 this.setState({
-                  tableCities: this.setWeatherTable({ lat, long }),
+                  table: this.setWeatherTable(this.state.table, { lat, long }),
                 });
                 break;
               }
@@ -37,11 +41,10 @@ class HomePage extends React.Component {
   }
 
 // return array of lat/longs for 3 cities and pass to WeatherTableContainer for api calls
-  setWeatherTable(main) {
-    const first = main || { lat: 45, long: 113 };
-    const second = { lat: 45, long: 113 };
-    const third = { lat: 47, long: 113 };
-    return [first, second, third];
+  setWeatherTable(table, main) {
+    const newTable = table;
+    newTable[0] = main;
+    return newTable;
   }
 
 // TODO: render weather table with 3 default cities, icon, and temp
@@ -50,7 +53,7 @@ class HomePage extends React.Component {
     return (
       <div className="container-fluid">
         <SearchContainer size="50" />
-        <WeatherTableContainer cities={this.state.tableCities} />
+        <WeatherTableContainer cities={this.state.table} />
       </div>
     );
   }

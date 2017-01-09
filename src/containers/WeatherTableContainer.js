@@ -13,6 +13,12 @@ class WeatherTableContainer extends Component {
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 
+  componentWillMount() {
+    WeatherApi.getWeatherMultiple(this.props.cities, (err, data) => {
+      this.setState({ weather: data });
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     WeatherApi.getWeatherMultiple(nextProps.cities, (err, data) => {
       this.setState({ weather: data });
@@ -25,11 +31,11 @@ class WeatherTableContainer extends Component {
   }
 
   render() {
-    const table = this.state.weather ?
-      <WeatherTable weather={this.state.weather} onClick={this.handleItemClick} /> :
-      <div />;
+    if (!this.state.weather) {
+      return false;  // or return loader
+    }
     return (
-      table
+      <WeatherTable weather={this.state.weather} onClick={this.handleItemClick} />
     );
   }
 }
