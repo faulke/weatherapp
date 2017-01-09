@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
 import Navbar from '../common/Navbar';
 import WeatherApi from '../../api/weatherApi';
 
-class CurrentWeather extends React.Component {
+class CurrentWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,10 +51,8 @@ class CurrentWeather extends React.Component {
       <div>
         <Navbar temp={temp} city={city} icon={icon} />
         <div className="container-fluid">
-          <div className="jumbotron">
-            <h1>Weather</h1>
-            {city}
-          </div>
+          <h1>Weather</h1>
+          {city}
         </div>
       </div>
     );

@@ -1,11 +1,11 @@
 // This component handles the App template used on every page.
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import WeatherApi from '../api/weatherApi';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
 
-class HomePage extends React.Component {
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,9 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <SearchContainer size="50" />
+        <div id="home-search" className="text-center">
+          <SearchContainer inline={false} />
+        </div>
         <WeatherTableContainer cities={this.state.table} />
       </div>
     );

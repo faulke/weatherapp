@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import WeatherApi from '../api/weatherApi';
 import WeatherTable from '../components/home/WeatherTable';
