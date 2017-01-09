@@ -4,13 +4,17 @@ import { LinkContainer } from 'react-router-bootstrap';
 import SearchContainer from '../../containers/SearchContainer';
 
 const NavbarInstance = (props) => {
-// TODO: add linkcontainer for Home
+  const iconClass = `wi wi-owm-${props.icon}`;
   return (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Toggle />
         <Navbar.Brand>
-          Orchard Homes (icon) temp
+          <span>{props.city}</span>
+          {' '}
+          <i className={iconClass} />
+          {' '}
+          <span>{props.temp}&deg;F</span>
         </Navbar.Brand>
       </Navbar.Header>
       <Navbar.Collapse>
