@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import WeatherApi from '../api/weatherApi';
 
-
 class App extends React.Component {
   render() {
     return (
