@@ -42,4 +42,10 @@ class SearchContainer extends Component {
   }
 }
 
+SearchContainer.propTypes = {
+  inline: React.PropTypes.bool,
+  place: React.PropTypes.string,
+  size: React.PropTypes.string,
+};
+
 export default SearchContainer;

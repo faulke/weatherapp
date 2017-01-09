@@ -6,6 +6,13 @@ import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
 
 class HomePage extends Component {
+  // return array of lat/longs for 3 cities and pass to WeatherTableContainer for api calls
+  static setWeatherTable(table, main) {
+    const newTable = table;
+    newTable[0] = main;
+    return newTable;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,24 +34,15 @@ class HomePage extends Component {
             for (let i = 0; i < data.results.length; i += 1) {
               if (data.results[i].types.indexOf('locality') > -1) {
                 this.setState({
-                  table: this.setWeatherTable(this.state.table, { lat, long }),
+                  table: HomePage.setWeatherTable(this.state.table, { lat, long }),
                 });
                 break;
               }
             }
           });
-           // if location, suggest location for weather
-           // browserHistory.push(`/${lat}/${long}`);
         }
       });
     }
-  }
-
-// return array of lat/longs for 3 cities and pass to WeatherTableContainer for api calls
-  setWeatherTable(table, main) {
-    const newTable = table;
-    newTable[0] = main;
-    return newTable;
   }
 
 // TODO: render weather table with 3 default cities, icon, and temp
