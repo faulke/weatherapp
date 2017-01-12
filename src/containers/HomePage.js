@@ -17,19 +17,21 @@ class HomePage extends Component {
     super(props);
     this.state = {
       table: [
-        { lat: 54, long: 112 },
-        { lat: 45, long: 113 },
-        { lat: 47, long: 113 },
+        { lat: null, long: null },
+        { lat: 45, long: -113 },
+        { lat: 47, long: -113 },
       ],
     };
   }
 
   componentWillMount() {
     if (navigator.geolocation) {
+      let lat;
+      let long;
       navigator.geolocation.getCurrentPosition((position) => {
         if (position) {
-          const lat = position.coords.latitude;
-          const long = position.coords.longitude;
+          lat = position.coords.latitude;
+          long = position.coords.longitude;
           WeatherApi.searchWeather('latlng', `${lat},${long}`, (err, data) => {
             for (let i = 0; i < data.results.length; i += 1) {
               if (data.results[i].types.indexOf('locality') > -1) {
@@ -42,12 +44,21 @@ class HomePage extends Component {
           });
         }
       });
+      setTimeout(() => {
+        if (!lat || !long) {
+          this.setState({
+            table: HomePage.setWeatherTable(this.state.table, { lat: 55, long: -113 }),
+          });
+        }
+      }, 500);
     }
   }
 
-// TODO: render weather table with 3 default cities, icon, and temp
-// TODO later: user can save 3 specific locations that pop up when logged in
+// TODO: user can save 3 specific locations that pop up when logged in
   render() {
+    if (this.state.table[0].lat == null) {
+      return false;
+    }
     return (
       <div className="container-fluid">
         <div id="home-search" className="text-center">
