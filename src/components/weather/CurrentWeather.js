@@ -6,8 +6,8 @@ import WeatherApi from '../../api/weatherApi';
 
 const CurrentWeather = (props) => {
   const current = props.current;
-  const city = current.name;
   const temp = Math.round(current.main.temp);
+  const wind = Math.round(current.wind.speed);
   const icon = current.weather[0].id;
   const iconClass = `wi wi-owm-${icon}`;
 
@@ -29,7 +29,7 @@ const CurrentWeather = (props) => {
           </Col>
           <Col sm={2}>
             <h3>Wind</h3>
-            <h4>{current.wind.speed} mph {current.wind.deg}</h4> 
+            <h4>{wind} mph</h4> 
           </Col>
         </Row>
       </Grid>
