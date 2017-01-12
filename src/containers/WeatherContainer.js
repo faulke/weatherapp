@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Navbar from '../components/common/Navbar';
 import CurrentWeather from '../components/weather/CurrentWeather';
+import ForecastContainer from './ForecastContainer';
 import WeatherApi from '../api/weatherApi';
 
-class CurrentWeatherContainer extends Component {
+class WeatherContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +37,7 @@ class CurrentWeatherContainer extends Component {
     const lat = this.state.location.lat;
     const long = this.state.location.long;
     WeatherApi.getWeather(lat, long, (err, res) => {
-      this.setState({ now: res[0], forecast: res[1] });
+      this.setState({ now: res[0], forecast: res[1].list });
     });
   }
 
@@ -50,16 +51,15 @@ class CurrentWeatherContainer extends Component {
     return (
       <div>
         <Navbar temp={temp} city={city} icon={icon} />
-        <CurrentWeather current={this.state.now} />
+        <CurrentWeather current={this.state.now} temp={temp} icon={icon} />
+        <ForecastContainer forecast={this.state.forecast} days={5} /> {/* TODO later: make days dynamic */}
       </div>
     );
   }
 }
 
-CurrentWeatherContainer.propTypes = {
+WeatherContainer.propTypes = {
   params: React.PropTypes.object.isRequired,
 };
 
-export default CurrentWeatherContainer;
-
-// TODO: Add props for weather parameters
+export default WeatherContainer;
