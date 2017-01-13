@@ -1,7 +1,7 @@
 /*** HOME PAGE ***/
 #home-search {
-  width: 505px;
-  margin: 0 auto;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
 td {
@@ -42,7 +42,6 @@ td > a:link {
 }
 
 .main-weather {
-  border: 1px solid black;
   margin: 0px 80px 0px !important;
 }
 

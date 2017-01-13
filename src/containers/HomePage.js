@@ -1,6 +1,7 @@
 // This component handles the App template used on every page.
 import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
+import { Grid, Row, Col } from 'react-bootstrap';
 import WeatherApi from '../api/weatherApi';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
@@ -61,9 +62,11 @@ class HomePage extends Component {
     }
     return (
       <div className="container-fluid">
-        <div id="home-search" className="text-center">
-          <SearchContainer inline={false} />
-        </div>
+        <Grid id="home-search">
+          <Col sm={4} smOffset={4}>
+            <SearchContainer inline={true} />
+          </Col>
+        </Grid>
         <WeatherTableContainer cities={this.state.table} />
       </div>
     );
