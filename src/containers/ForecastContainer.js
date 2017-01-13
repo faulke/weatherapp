@@ -4,11 +4,6 @@ import Forecast from '../components/weather/Forecast';
 import WeatherApi from '../api/weatherApi';
 
 class ForecastContainer extends Component {
-  componentWillMount() {
-    const days = this.getDays();
-    console.log(days);
-  }
-
   getDays() {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const d = new Date();

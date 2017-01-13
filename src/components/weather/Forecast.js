@@ -5,13 +5,15 @@ import { Clearfix, Grid, Row, Col } from 'react-bootstrap';
 const Forecast = (props) => {
   const weather = props.data;
   return (
-    <Row className="show-grid">
-      <Col sm={2} />
+    <Row className="forecast text-center">
+      <Col sm={1} />
       {props.days.map((x, i) => {
+        const icon = `wi wi-owm-${weather[i].weather[0].id}`;
         return (
-          <Col key={i} sm={2}>
+          <Col key={i} sm={2} className="forecast-day">
             <h4>{x}</h4>
-            <h3>{weather[i].temp.max}</h3>
+            <h2><i className={icon} /></h2>
+            <h3>{Math.round(weather[i].temp.max)}&deg;F</h3>
           </Col>
         );
       })}

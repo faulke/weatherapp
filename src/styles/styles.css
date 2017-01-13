@@ -35,3 +35,40 @@ td > a:link {
     display: none;
   }
 }
+
+/**** WEATHER PAGE ****/
+.main-city {
+  margin-bottom: 20px;
+}
+
+.main-weather {
+  border: 1px solid black;
+  margin: 0px 80px 0px !important;
+}
+
+.main-weather > div {
+  margin-top: 15px;
+}
+
+.main-temp {
+  margin-top: 0px !important;
+}
+
+.main-icon {
+  font-size: 50px;
+}
+
+.forecast {
+  margin-top: 20px;
+}
+
+.forecast-day {
+  border: 1px solid black;
+  margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-weather {
+    margin: 0px 15px 0px;
+  }
+}
