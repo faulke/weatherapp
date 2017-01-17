@@ -4,3 +4,4 @@ config.json
 .eslintrc
 .env
 .vscode/settings.json
+dist
