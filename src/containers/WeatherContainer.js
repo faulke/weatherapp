@@ -46,11 +46,10 @@ class WeatherContainer extends Component {
       return false;
     }
     const temp = Math.round(this.state.now.main.temp);
-    const city = this.state.now.name;
     const icon = this.state.now.weather[0].id;
     return (
       <div>
-        <Navbar temp={temp} city={city} icon={icon} />
+        <Navbar />
         <CurrentWeather current={this.state.now} temp={temp} icon={icon} />
         <ForecastContainer forecast={this.state.forecast} days={5} /> {/* TODO later: make days dynamic */}
       </div>
