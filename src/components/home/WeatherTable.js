@@ -22,7 +22,7 @@ const WeatherTable = ({ weather }) => (
                         {' '}
                         <i className={icon} />
                         {' '}
-                        <span>{temp}&deg;F</span>
+                        <span className="pull-right">{temp}&deg;F</span>
                       </Link>
                     </td>
                   </tr>
