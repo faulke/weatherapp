@@ -6,11 +6,10 @@ const Forecast = (props) => {
   const weather = props.data;
   return (
     <Row className="forecast text-center">
-      <Col sm={1} />
       {props.days.map((x, i) => {
         const icon = `wi wi-owm-${weather[i].weather[0].id}`;
         return (
-          <Col key={i} sm={2} className="forecast-day">
+          <Col key={i} className="forecast-day">
             <h4>{x}</h4>
             <h2><i className={icon} /></h2>
             <h3>{Math.round(weather[i].temp.max)}&deg;F</h3>

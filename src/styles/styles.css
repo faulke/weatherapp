@@ -62,12 +62,21 @@ td > a:link {
 }
 
 .forecast-day {
+  width: 16%;
+  display: inline-block;
   border: 1px solid black;
   margin-bottom: 40px;
+  margin-right: 2%;
+  margin-left: 2%;
 }
 
 @media only screen and (max-width: 768px) {
   .main-weather {
     margin: 0px 15px 0px;
+  }
+
+  .forecast-day{
+    display: block;
+    width: 96%;
   }
 }
