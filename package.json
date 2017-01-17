@@ -13,7 +13,8 @@
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all clean-dist test build:html",
     "build": "babel-node tools/build.js",
-    "postbuild": "babel-node tools/distServer.js"
+    "postbuild": "babel-node tools/distServer.js",
+    "heroku-postbuild": "npm-run-all clean-dist build:html build"
   },
   "repository": {
     "type": "git",
