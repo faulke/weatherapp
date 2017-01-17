@@ -7,7 +7,8 @@ const myApp = {
     myApp.display.setButton();
     myApp.display.setDays();
     myApp.display.setTimes();
-    myApp.display.convertValues();
+    myApp.display.convertPressure();
+    myApp.display.roundTemps();
     if ($('body').hasClass('location-weather')) {
       myApp.display.setBackground();
     }
@@ -59,18 +60,19 @@ myApp.display = {
     $('#sunrise').html(myApp.helpers.setTime(oldSunrise, 'sunrise'));
     $('#sunset').html(myApp.helpers.setTime(oldSunset, 'sunset'));
   },
-  convertValues: () => {
+  convertPressure: () => {
     const pressure = $('#pressure').text();
-    $('#pressure').html(myApp.helpers.convertPressure(pressure));
-
-    const temps = $('.temp');
-    let i;
-    for (i = 0; i < temps.length; i += 1) {
-      const temp = $(temps[i]).html();
-      const newTemp = myApp.helpers.kelvinToFaren(temp);
-      $(temps[i]).text(`${newTemp} ${String.fromCharCode(176)}F`);
-    }
+    $('#pressure').html(
+      (parseInt(pressure, 10) / 25.4).toFixed(1)
+    );
   },
+  roundTemps: () => {
+    const temps = $('.temp');
+    for (let i = 0; i < temps.length; i += 1) {
+      const temp = $(temps[i]).html();
+      $(temps[i]).text(`${Math.round(temp)}${String.fromCharCode(176)}F`);
+    }
+  }
 };
 
 myApp.helpers = {
@@ -83,12 +85,6 @@ myApp.helpers = {
       return `${hours}:${minutes} AM`;
     }
     return `${hours}:${minutes} PM`;
-  },
-  convertPressure: (pressure) => {
-    return (parseInt(pressure, 10) / 25.4).toFixed(1);
-  },
-  kelvinToFaren: (temp) => {
-    return Math.round((parseFloat(temp) * (9 / 5)) - 459.67);
   },
   farenToCels: (temp) => {
     return Math.round((temp - 32) * (5 / 9));
@@ -104,10 +100,13 @@ myApp.actions = {
     let i;
     for (i = 0; i < temps.length; i += 1) {
       const dig = $(temps[i]).html();
-      const temp = dig.match(/\d/g).join('');
+      const temp = dig.match(/-?\d/g).join('');
       const newTemp = id === 'cels' ?
         myApp.helpers.farenToCels(temp) : myApp.helpers.celsToFaren(temp);
-      $(temps[i]).text(`${newTemp} ${String.fromCharCode(176)}C`);
+      const fullTemp = id === 'cels' ?
+        `${newTemp} ${String.fromCharCode(176)}C` :
+        `${newTemp} ${String.fromCharCode(176)}F`;
+      $(temps[i]).text(fullTemp);
     }
 
     if (id === 'cels') {

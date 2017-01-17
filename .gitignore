@@ -2,6 +2,5 @@ node_modules
 .eslintrc.json
 config.json
 .eslintrc
-.vscode/settings.json
-public/css/mystyle.css
 .env
+.vscode/settings.json
