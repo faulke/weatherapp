@@ -1,0 +1,82 @@
+/*** HOME PAGE ***/
+#home-search {
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+td {
+  padding: 0 !important;
+}
+
+td > a {
+  color: black;
+  display: block;
+  padding: 5px;
+}
+
+td > a:link {
+  text-decoration: none;
+}
+
+/*** NAVBAR ***/
+.navbar-description {
+  color: white;
+  font-size: 20px;
+  line-height: 50px;
+  left: 0;
+  margin: auto !important;
+  position: absolute;
+  right: 0;
+  width: 250px;
+}
+
+@media only screen and (max-width: 860px) {
+  .navbar-description {
+    display: none;
+  }
+}
+
+/**** WEATHER PAGE ****/
+.main-city {
+  margin-bottom: 20px;
+}
+
+.main-weather {
+  margin: 0px 80px 0px !important;
+}
+
+.main-weather > div {
+  margin-top: 15px;
+}
+
+.main-temp {
+  margin-top: 0px !important;
+}
+
+.main-icon {
+  font-size: 50px;
+}
+
+.forecast {
+  margin-top: 20px;
+}
+
+.forecast-day {
+  width: 16%;
+  display: inline-block;
+  border: 1px solid black;
+  margin-bottom: 40px;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-weather {
+    margin: 0px 15px 0px;
+  }
+
+  .forecast-day{
+    display: block;
+    width: 96%;
+  }
+}
