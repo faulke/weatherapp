@@ -1,23 +1,26 @@
 import React from 'react';
-import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { InputGroup, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
 // TODO: implement google autocomplete for addresses
 const Search = props => (
-  <Form inline={props.inline} className={props.place} onSubmit={props.onSubmit}>
+  <form className={props.place} onSubmit={props.onSubmit}>
     <FormGroup>
-      <FormControl 
-        type="text" 
-        placeholder="City, ST" 
-        value={props.value} 
-        onChange={props.onChange} 
-        size={props.size} 
-      />
-      <Button type="submit" bsStyle="primary">
-        Search {'\u00A0'}
-        <span className="glyphicon glyphicon-search" />
-      </Button>
+      <InputGroup>
+        <FormControl 
+          type="text"
+          placeholder="City, ST" 
+          value={props.value} 
+          onChange={props.onChange} 
+          size={props.size} 
+        />
+        <InputGroup.Button>
+          <Button type="submit" bsStyle="primary">
+            <span className="glyphicon glyphicon-search" />
+          </Button>
+        </InputGroup.Button>
+      </InputGroup>
     </FormGroup>
-  </Form>
+  </form>
 );
 
 Search.propTypes = {
