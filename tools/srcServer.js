@@ -5,11 +5,14 @@ import request from 'request';
 import webpack from 'webpack';
 import path from 'path';
 import open from 'open';
+import favicon from 'serve-favicon';
 import config from '../webpack.config.dev';
 
 const port = process.env.PORT || 3000;
 const app = express();
 const compiler = webpack(config);
+
+app.use(favicon(path.join(__dirname, '../src/favicon.ico')));
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
