@@ -14,6 +14,21 @@ const compiler = webpack(config);
 
 app.use(favicon(path.join(__dirname, '../src/favicon.ico')));
 
+app.use('/api/geocode', (req, res) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?${req.query.type}=${req.query.search}&key=${process.env.GOOGLE_KEY}`;
+  req.pipe(request(url)).pipe(res);
+});
+
+app.use('/api/weather/', (req, res) => {
+  const url = `http://api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&units=imperial&APPID=${process.env.WEATHER_KEY}`;
+  req.pipe(request(url)).pipe(res);
+});
+
+app.use('/api/forecast/', (req, res) => {
+  const url = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${req.query.lat}&lon=${req.query.lon}&cnt=5&units=imperial&APPID=${process.env.WEATHER_KEY}`;
+  req.pipe(request(url)).pipe(res);
+});
+
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath,
@@ -21,15 +36,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('/:lat/:long', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
-});
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
-});
-
-app.get('/home', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
