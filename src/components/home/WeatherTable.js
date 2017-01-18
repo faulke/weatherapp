@@ -11,7 +11,7 @@ const WeatherTable = ({ weather }) => (
           <tbody>
             {
               weather.map((x) => {
-                const url = `/${x.coord.lat}/${x.coord.lon}`;
+                const url = `/weather?lat=${x.coord.lat}&lon=${x.coord.lon}`;
                 const icon = `wi wi-owm-${x.weather[0].id}`;
                 const temp = Math.round(x.main.temp);
                 return (
