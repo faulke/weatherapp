@@ -4,8 +4,8 @@
   "description": "Basic weather app with React.js",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel open:src test:watch",
-    "start:prod": "babel-node tools/distServer.js",
+    "dev": "npm-run-all --parallel open:src test:watch",
+    "prod": "babel-node tools/distServer.js",
     "open:src": "babel-node tools/srcServer.js",
     "test": "mocha --reporter progress tools/testSetup.js src/**/*.test.js",
     "test:watch": "npm run test -- --watch",
