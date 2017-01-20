@@ -14,7 +14,10 @@ class WeatherApi {
     async.map(urls, (url, callback) => {
       request({
         url,
-        withCredentials: false,
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASSWORD,
+        },
       }, (err, response, body) => {
         if (err) {
           callback(err);
@@ -37,7 +40,10 @@ class WeatherApi {
     async.map(urls, (url, callback) => {
       request({
         url,
-        withCredentials: false,
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASSWORD,
+        },
       }, (err, response, body) => {
         if (err) {
           callback(err);
@@ -58,7 +64,10 @@ class WeatherApi {
     const url = `http://localhost:3000/api/geocode?type=${type}&search=${search}`;
     request.get({
       url,
-      withCredentials: false,
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASSWORD,
+      },
     }, (err, result, body) => {
       if (err) {
         cb(err);
