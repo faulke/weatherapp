@@ -9,8 +9,8 @@ class WeatherContainer extends Component {
     super(props);
     this.state = {
       location: {
-        lat: this.props.params.lat,
-        long: this.props.params.long,
+        lat: this.props.location.query.lat,
+        long: this.props.location.query.lon,
       },
       now: null,
       forecast: null,
@@ -25,8 +25,8 @@ class WeatherContainer extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       location: {
-        lat: nextProps.params.lat,
-        long: nextProps.params.long,
+        lat: nextProps.location.query.lat,
+        long: nextProps.location.query.lon,
       },
     }, () => {
       this.getWeather();

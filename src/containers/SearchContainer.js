@@ -15,11 +15,11 @@ class SearchContainer extends Component {
 
   submitForm(evt) {
     evt.preventDefault();
-    WeatherApi.searchWeather('address', this.state.city, (err, data) => {
+    WeatherApi.searchLocation('address', this.state.city, (err, data) => {
       if (!err && data.results.length) {
         const lat = data.results[0].geometry.location.lat;
         const long = data.results[0].geometry.location.lng;
-        browserHistory.push(`/${lat}/${long}`); // change url with input to render weather component
+        browserHistory.replace(`/weather?lat=${lat}&lon=${long}`);  // change url with input to render weather component
       } // TODO: Add error handling (e.g., "That location doesn't exist...try another")
     });
   }

@@ -33,7 +33,7 @@ class HomePage extends Component {
         if (position) {
           lat = position.coords.latitude;
           long = position.coords.longitude;
-          WeatherApi.searchWeather('latlng', `${lat},${long}`, (err, data) => {
+          WeatherApi.searchLocation('latlng', `${lat},${long}`, (err, data) => {
             for (let i = 0; i < data.results.length; i += 1) {
               if (data.results[i].types.indexOf('locality') > -1) {
                 this.setState({

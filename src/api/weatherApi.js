@@ -5,15 +5,19 @@ const weatherKey = process.env.WEATHER_KEY;
 const googleKey = process.env.GOOGLE_KEY;
 
 class WeatherApi {
+
   static getWeather(lat, long, cb) {
     const urls = [
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=${weatherKey}`,
-      `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&cnt=5&units=imperial&APPID=${weatherKey}`];
+      `http://localhost:3000/api/weather?lat=${lat}&lon=${long}`,
+      `http://localhost:3000/api/forecast?lat=${lat}&lon=${long}`];
 
     async.map(urls, (url, callback) => {
       request({
         url,
-        withCredentials: false,
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASSWORD,
+        },
       }, (err, response, body) => {
         if (err) {
           callback(err);
@@ -31,12 +35,15 @@ class WeatherApi {
   }
 
   static getWeatherMultiple(locations, cb) {
-    const urls = locations.map(x => `http://api.openweathermap.org/data/2.5/weather?lat=${x.lat}&lon=${x.long}&units=imperial&APPID=${weatherKey}`);
+    const urls = locations.map(x => `http://localhost:3000/api/weather?lat=${x.lat}&lon=${x.long}&units=imperial`);
 
     async.map(urls, (url, callback) => {
       request({
         url,
-        withCredentials: false,
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASSWORD,
+        },
       }, (err, response, body) => {
         if (err) {
           callback(err);
@@ -53,12 +60,14 @@ class WeatherApi {
     });
   }
   
-  static searchWeather(type, search, cb) {
-    const self = this;
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?${type}=${search}&key=${googleKey}`;
+  static searchLocation(type, search, cb) {
+    const url = `http://localhost:3000/api/geocode?type=${type}&search=${search}`;
     request.get({
       url,
-      withCredentials: false,
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASSWORD,
+      },
     }, (err, result, body) => {
       if (err) {
         cb(err);

@@ -6,6 +6,7 @@ import webpack from 'webpack';
 import path from 'path';
 import open from 'open';
 import favicon from 'serve-favicon';
+import api from './routes/api';
 import config from '../webpack.config.dev';
 
 const port = process.env.PORT || 3000;
@@ -21,15 +22,9 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('/:lat/:long', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
-});
+app.use('/api', api);
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
-});
-
-app.get('/home', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
