@@ -3,13 +3,16 @@ import request from 'request';
 
 const weatherKey = process.env.WEATHER_KEY;
 const googleKey = process.env.GOOGLE_KEY;
+const hostName = process.env.NODE_ENV === 'production' ?
+  'https://guarded-tor-95941.herokuapp.com' :
+  'http://localhost:3000';
 
 class WeatherApi {
 
   static getWeather(lat, long, cb) {
     const urls = [
-      `http://localhost:3000/api/weather?lat=${lat}&lon=${long}`,
-      `http://localhost:3000/api/forecast?lat=${lat}&lon=${long}`];
+      `${hostName}/api/weather?lat=${lat}&lon=${long}`,
+      `${hostName}/api/forecast?lat=${lat}&lon=${long}`];
 
     async.map(urls, (url, callback) => {
       request({
@@ -35,7 +38,7 @@ class WeatherApi {
   }
 
   static getWeatherMultiple(locations, cb) {
-    const urls = locations.map(x => `http://localhost:3000/api/weather?lat=${x.lat}&lon=${x.long}&units=imperial`);
+    const urls = locations.map(x => `${hostName}/api/weather?lat=${x.lat}&lon=${x.long}&units=imperial`);
 
     async.map(urls, (url, callback) => {
       request({
@@ -61,7 +64,7 @@ class WeatherApi {
   }
   
   static searchLocation(type, search, cb) {
-    const url = `http://localhost:3000/api/geocode?type=${type}&search=${search}`;
+    const url = `${hostName}/api/geocode?type=${type}&search=${search}`;
     request.get({
       url,
       auth: {
