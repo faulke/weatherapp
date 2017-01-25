@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import WeatherApi from '../api/weatherApi';
+import api from '../api/index';
 import WeatherTable from '../components/home/WeatherTable';
 
 // TODO: implement google autocomplete for addresses
@@ -17,13 +17,13 @@ class WeatherTableContainer extends Component {
   }
 
   componentWillMount() {
-    WeatherApi.getWeatherMultiple(this.props.cities, (err, data) => {
+    api.weather.getMultiple(this.props.cities, (err, data) => {
       this.setState({ weather: data });
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    WeatherApi.getWeatherMultiple(nextProps.cities, (err, data) => {
+    api.weather.getMultiple(nextProps.cities, (err, data) => {
       this.setState({ weather: data });
     });
   }

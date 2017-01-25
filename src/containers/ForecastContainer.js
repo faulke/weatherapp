@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Grid } from 'react-bootstrap';
 import Forecast from '../components/weather/Forecast';
-import WeatherApi from '../api/weatherApi';
+import api from '../api/index';
 
 class ForecastContainer extends Component {
   getDays() {

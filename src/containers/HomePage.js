@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
-import WeatherApi from '../api/weatherApi';
+import api from '../api/index';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
 
@@ -33,7 +33,7 @@ class HomePage extends Component {
         if (position) {
           lat = position.coords.latitude;
           long = position.coords.longitude;
-          WeatherApi.searchLocation('latlng', `${lat},${long}`, (err, data) => {
+          api.search('latlng', `${lat},${long}`, (err, data) => {
             for (let i = 0; i < data.results.length; i += 1) {
               if (data.results[i].types.indexOf('locality') > -1) {
                 this.setState({

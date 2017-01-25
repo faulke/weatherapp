@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import WeatherApi from '../api/weatherApi';
+import api from '../api/index';
 import Search from '../components/common/Search';
 
 // TODO: implement google autocomplete for addresses
@@ -15,7 +15,7 @@ class SearchContainer extends Component {
 
   submitForm(evt) {
     evt.preventDefault();
-    WeatherApi.searchLocation('address', this.state.city, (err, data) => {
+    api.search('address', this.state.city, (err, data) => {
       if (!err && data.results.length) {
         const lat = data.results[0].geometry.location.lat;
         const long = data.results[0].geometry.location.lng;

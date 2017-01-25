@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Navbar from '../components/common/Navbar';
 import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
-import WeatherApi from '../api/weatherApi';
+import api from '../api/index';
 
 class WeatherContainer extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class WeatherContainer extends Component {
   getWeather() {
     const lat = this.state.location.lat;
     const long = this.state.location.long;
-    WeatherApi.getWeather(lat, long, (err, res) => {
+    api.weather.get(lat, long, (err, res) => {
       this.setState({ now: res[0], forecast: res[1].list });
     });
   }

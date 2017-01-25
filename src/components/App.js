@@ -1,7 +1,7 @@
 // This component handles the App template used on every page.
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-import WeatherApi from '../api/weatherApi';
+import api from '../api/index';
 
 class App extends React.Component {
   render() {
