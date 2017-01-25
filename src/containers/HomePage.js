@@ -63,7 +63,10 @@ class HomePage extends Component {
     return (
       <div className="container-fluid">
         <Grid id="home-search">
-          <Col sm={4} smOffset={4}>
+          <Col sm={4} smOffset={4} className="text-center">
+            <div className="main-icon mb30">
+              <i className="wi wi-day-sunny" />
+            </div>
             <SearchContainer inline={true} />
           </Col>
         </Grid>

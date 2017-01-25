@@ -1,7 +1,7 @@
 /*** HOME PAGE ***/
 #home-search {
-  margin-top: 200px;
-  margin-bottom: 100px;
+  margin-top: 130px;
+  margin-bottom: 80px;
 }
 
 td {
@@ -79,4 +79,9 @@ td > a:link {
     display: block;
     width: 96%;
   }
+}
+
+/****GLOBAL***/
+.mb30 {
+  margin-bottom: 30px;
 }
