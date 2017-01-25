@@ -18,7 +18,7 @@ class WeatherContainer extends Component {
     this.getWeather = this.getWeather.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getWeather();
   }
 
@@ -58,7 +58,7 @@ class WeatherContainer extends Component {
 }
 
 WeatherContainer.propTypes = {
-  params: React.PropTypes.object.isRequired,
+  location: React.PropTypes.object,
 };
 
 export default WeatherContainer;

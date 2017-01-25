@@ -25,7 +25,7 @@ class HomePage extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (navigator.geolocation) {
       let lat;
       let long;

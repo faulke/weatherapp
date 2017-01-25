@@ -16,7 +16,7 @@ class WeatherTableContainer extends Component {
     this.state = { weather: null };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     api.weather.getMultiple(this.props.cities, (err, data) => {
       this.setState({ weather: data });
     });
