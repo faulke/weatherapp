@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import api from '../api/index';
 import Search from '../components/common/Search';
+import { searchLocation, updateSearch } from '../actions/index';
 
 // TODO: implement google autocomplete for addresses
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { city: '' };
 
     this.submitForm = this.submitForm.bind(this);
     this.updateInput = this.updateInput.bind(this);
@@ -15,7 +16,8 @@ class SearchContainer extends Component {
 
   submitForm(evt) {
     evt.preventDefault();
-    api.search('address', this.state.city, (err, data) => {
+    const search = this.props.search;
+    api.search('address', this.props.search, (err, data) => {
       if (!err && data.results.length) {
         const lat = data.results[0].geometry.location.lat;
         const long = data.results[0].geometry.location.lng;
@@ -25,7 +27,7 @@ class SearchContainer extends Component {
   }
 
   updateInput(evt) {
-    this.setState({ city: evt.target.value });
+    this.props.updateSearch(evt);
   }
 
   render() {
@@ -33,7 +35,7 @@ class SearchContainer extends Component {
       <Search 
         inline={this.props.inline} 
         place={this.props.place} 
-        value={this.state.city} 
+        value={this.props.input} 
         onSubmit={this.submitForm} 
         onChange={this.updateInput} 
         size={this.props.size} 
@@ -43,9 +45,27 @@ class SearchContainer extends Component {
 }
 
 SearchContainer.propTypes = {
+  updateSearch: React.PropTypes.func,
+  input: React.PropTypes.string,
+  search: React.PropTypes.string,
   inline: React.PropTypes.bool,
   place: React.PropTypes.string,
   size: React.PropTypes.string,
 };
 
-export default SearchContainer;
+function mapStateToProps(state) {
+  const { input, search } = state.weather;
+  return {
+    input,
+    search,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateSearch: input => dispatch(updateSearch(input)),
+    searchLocation: search => dispatch(searchLocation(search)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
