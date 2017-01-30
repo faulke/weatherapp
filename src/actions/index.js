@@ -65,8 +65,14 @@ export const receiveWeather = (weather) => ({
   weather,
 });
 
-export function getWeather(lat, long) {
+export const REQUEST_WEATHER = 'REQUEST_WEATHER';
+export const requestWeather = () => ({
+  type: REQUEST_WEATHER,
+});
+
+export function shouldFetchWeather(lat, long) {
   return (dispatch) => {
+    dispatch(requestWeather());
     return api.weather.get(lat, long, (err, res) => {
       if (err) {
         console.error(err);
