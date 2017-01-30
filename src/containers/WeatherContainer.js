@@ -1,64 +1,60 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Navbar from '../components/common/Navbar';
 import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
-import api from '../api/index';
+import { getWeather } from '../actions/index';
 
 class WeatherContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: {
-        lat: this.props.location.query.lat,
-        long: this.props.location.query.lon,
-      },
-      now: null,
-      forecast: null,
-    };
-    this.getWeather = this.getWeather.bind(this);
-  }
 
   componentDidMount() {
-    this.getWeather();
+    const { lat, long } = this.props.params;
+    this.props.getWeather(lat, long);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      location: {
-        lat: nextProps.location.query.lat,
-        long: nextProps.location.query.lon,
-      },
-    }, () => {
-      this.getWeather();
-    });
-  }
-
-  getWeather() {
-    const lat = this.state.location.lat;
-    const long = this.state.location.long;
-    api.weather.get(lat, long, (err, res) => {
-      this.setState({ now: res[0], forecast: res[1].list });
-    });
+    if (this.props.params !== nextProps.params) {
+      const { lat, long } = nextProps.location;
+      nextProps.getWeather(lat, long);
+    }
   }
 
   render() {
-    if (!this.state.now) {
+    if (this.props.now == null) {
       return false;
     }
-    const temp = Math.round(this.state.now.main.temp);
-    const icon = this.state.now.weather[0].id;
+    const temp = Math.round(this.props.now.main.temp);
+    const icon = this.props.now.weather[0].id;
     return (
       <div>
         <Navbar />
-        <CurrentWeather current={this.state.now} temp={temp} icon={icon} />
-        <ForecastContainer forecast={this.state.forecast} days={5} /> {/* TODO later: make days dynamic */}
+        <CurrentWeather current={this.props.now} temp={temp} icon={icon} />
+        <ForecastContainer forecast={this.props.forecast} days={5} /> {/* TODO later: make days dynamic */}
       </div>
     );
   }
 }
 
 WeatherContainer.propTypes = {
-  location: React.PropTypes.object,
+  getWeather: React.PropTypes.func.isRequired,
+  now: React.PropTypes.object,
+  forecast: React.PropTypes.array,
+  params: React.PropTypes.object,
 };
 
-export default WeatherContainer;
+function mapStateToProps(state) {
+  const { now, forecast, location } = state.weather;
+  return {
+    now,
+    forecast,
+    location,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getWeather: (lat, long) => dispatch(getWeather(lat, long)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherContainer);
