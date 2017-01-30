@@ -19,7 +19,7 @@ const auth = (req, res, next) => {
 };
 
 router.get('/geocode', auth, (req, res) => {
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?${req.query.type}=${req.query.search}&key=${process.env.GOOGLE_KEY}`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${req.query.search}&key=${process.env.GOOGLE_KEY}`;
   return req.pipe(request(url)).pipe(res);
 });
 
