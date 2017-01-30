@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import api from '../api/index';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
+import Loader from '../components/common/Loader';
 import { getLocation, setTableLocations, setLocation } from '../actions/index';
 
 class HomePage extends Component {
@@ -16,7 +17,7 @@ class HomePage extends Component {
 // TODO: user can save 3 specific locations that pop up when logged in
   render() {
     if (this.props.table[0].lat == null) {
-      return false;
+      return <Loader />;
     }
     return (
       <div className="container-fluid">
