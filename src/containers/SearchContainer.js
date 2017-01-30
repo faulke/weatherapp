@@ -17,13 +17,7 @@ class SearchContainer extends Component {
   submitForm(evt) {
     evt.preventDefault();
     const search = this.props.search;
-    api.search('address', this.props.search, (err, data) => {
-      if (!err && data.results.length) {
-        const lat = data.results[0].geometry.location.lat;
-        const long = data.results[0].geometry.location.lng;
-        browserHistory.replace(`/weather?lat=${lat}&lon=${long}`);  // change url with input to render weather component
-      } // TODO: Add error handling (e.g., "That location doesn't exist...try another")
-    });
+    this.props.searchLocation(search);
   }
 
   updateInput(evt) {
@@ -33,7 +27,6 @@ class SearchContainer extends Component {
   render() {
     return (
       <Search 
-        inline={this.props.inline} 
         place={this.props.place} 
         value={this.props.input} 
         onSubmit={this.submitForm} 
@@ -45,10 +38,10 @@ class SearchContainer extends Component {
 }
 
 SearchContainer.propTypes = {
+  searchLocation: React.PropTypes.func.isRequired,
   updateSearch: React.PropTypes.func,
   input: React.PropTypes.string,
   search: React.PropTypes.string,
-  inline: React.PropTypes.bool,
   place: React.PropTypes.string,
   size: React.PropTypes.string,
 };
