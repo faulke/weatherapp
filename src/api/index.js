@@ -49,8 +49,8 @@ const getWeatherMultiple = (locations, cb) => {
   });
 };
 
-const searchLocation = (type, search, cb) => {
-  const url = `${hostName}/api/geocode?type=${type}&search=${search}`;
+const searchLocation = (search, cb) => {
+  const url = `${hostName}/api/geocode?type=address&search=${search}`;
   fetchJson(url, (err, res) => {
     if (err) cb(err);
     cb(null, res);

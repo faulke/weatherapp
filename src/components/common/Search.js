@@ -2,16 +2,16 @@ import React from 'react';
 import { InputGroup, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
 // TODO: implement google autocomplete for addresses
-const Search = props => (
-  <form className={props.place} onSubmit={props.onSubmit}>
+const Search = ({ place, onSubmit, onChange, value, size }) => (
+  <form className={place} onSubmit={onSubmit}>
     <FormGroup>
       <InputGroup>
         <FormControl 
           type="text"
           placeholder="City, ST" 
-          value={props.value} 
-          onChange={props.onChange} 
-          size={props.size} 
+          value={value} 
+          onChange={onChange} 
+          size={size} 
         />
         <InputGroup.Button>
           <Button type="submit" bsStyle="primary">
@@ -24,11 +24,10 @@ const Search = props => (
 );
 
 Search.propTypes = {
-  inline: React.PropTypes.bool,
   place: React.PropTypes.string,
   onSubmit: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.string,
   size: React.PropTypes.string,
 };
 
