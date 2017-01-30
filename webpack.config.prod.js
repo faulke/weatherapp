@@ -17,7 +17,6 @@ export default {
     publicPath: '/',
     filename: 'bundle.js',
   },
-  historyApiFallback: true,
   devServer: {
     contentBase: './dist',
   },
