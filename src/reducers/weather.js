@@ -1,4 +1,11 @@
-import { SEARCH_LOCATION, UPDATE_SEARCH } from '../actions';
+import { 
+  SEARCH_LOCATION, 
+  UPDATE_SEARCH, 
+  RECEIVE_WEATHER,
+  RECEIVE_WEATHER_MULTIPLE, 
+  SET_LOCATION, 
+  SET_TABLE,
+} from '../actions';
 
 export const initialState = {
   table: [
@@ -14,6 +21,7 @@ export const initialState = {
   now: null,
   forecast: null,
   tableWeather: null,
+  isFetching: false,
 };
 
 export const weather = (state = initialState, action) => {
@@ -26,6 +34,29 @@ export const weather = (state = initialState, action) => {
     case SEARCH_LOCATION:
       return Object.assign({}, state, {
         search: action.search,
+      });
+    case RECEIVE_WEATHER:
+      return Object.assign({}, state, {
+        now: action.weather[0],
+        forecast: action.weather[1].list,
+      });
+    case RECEIVE_WEATHER_MULTIPLE:
+      return Object.assign({}, state, {
+        tableWeather: action.tableWeather,
+      });
+    case SET_LOCATION:
+      return Object.assign({}, state, {
+        location: {
+          lat: action.lat,
+          long: action.long,
+        },
+      });
+    case SET_TABLE:
+      return Object.assign({}, state, {
+        table: [{
+          lat: action.lat,
+          long: action.long,
+        }, state.table[1], state.table[2]],
       });
     default:
       return state;
