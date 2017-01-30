@@ -12,7 +12,7 @@ const app = express();
 
 app.use(favicon(path.join(__dirname, '../src/favicon.ico')));
 
-app.use(express.static('dist'));
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 app.use('/api', api);
 
