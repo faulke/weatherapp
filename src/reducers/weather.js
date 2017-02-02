@@ -1,6 +1,7 @@
 import { 
   SEARCH_LOCATION, 
-  UPDATE_SEARCH, 
+  UPDATE_SEARCH,
+  REQUEST_WEATHER, 
   RECEIVE_WEATHER,
   RECEIVE_WEATHER_MULTIPLE, 
   SET_LOCATION, 
@@ -35,10 +36,15 @@ export const weather = (state = initialState, action) => {
       return Object.assign({}, state, {
         search: action.search,
       });
+    case REQUEST_WEATHER:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
     case RECEIVE_WEATHER:
       return Object.assign({}, state, {
         now: action.weather[0],
         forecast: action.weather[1].list,
+        isFetching: false,
       });
     case RECEIVE_WEATHER_MULTIPLE:
       return Object.assign({}, state, {
