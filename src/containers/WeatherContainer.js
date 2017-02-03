@@ -5,9 +5,14 @@ import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
 import Loader from '../components/common/Loader';
 import Footer from '../components/common/Footer';
-import { shouldFetchWeather } from '../actions/index';
+import { shouldFetchWeather, unitsToggle } from '../actions/index';
 
 class WeatherContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleUnitsToggle = this.handleUnitsToggle.bind(this);
+  }
 
   componentDidMount() {
     const { lat, long } = this.props.params;
@@ -19,6 +24,11 @@ class WeatherContainer extends Component {
       const { lat, long } = nextProps.params;
       nextProps.shouldFetchWeather(lat, long);
     }
+  }
+
+  handleUnitsToggle(evt) {
+    const id = evt.target.id;
+    this.props.unitsToggle(id);
   }
 
   render() {
@@ -36,7 +46,7 @@ class WeatherContainer extends Component {
             <ForecastContainer forecast={forecast} days={5} celsius={celsius} />
           </div>
         )}
-        <Footer />
+        <Footer onClick={this.handleUnitsToggle} />
       </div>
     );
   }
@@ -49,6 +59,7 @@ WeatherContainer.propTypes = {
   forecast: React.PropTypes.array,
   params: React.PropTypes.object,
   celsius: React.PropTypes.bool.isRequired,
+  unitsToggle: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -65,6 +76,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     shouldFetchWeather: (lat, long) => dispatch(shouldFetchWeather(lat, long)),
+    unitsToggle: id => dispatch(unitsToggle(id)),
   };
 }
 

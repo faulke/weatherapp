@@ -107,3 +107,16 @@ export function shouldFetchWeatherMultiple(locations) {
     });
   };
 }
+
+export const UPDATE_UNITS = 'UPDATE_UNITS';
+export const updateUnits = (celsius) => ({
+  type: UPDATE_UNITS,
+  celsius,
+});
+
+export function unitsToggle(id) {
+  return (dispatch) => {
+    const celsius = id === 'cels';
+    dispatch(updateUnits(celsius));
+  };
+}
