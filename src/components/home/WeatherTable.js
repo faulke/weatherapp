@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 // TODO: implement google autocomplete for addresses
-const WeatherTable = ({ weather }) => (
+const WeatherTable = ({ celsius, weather }) => (
   <Grid>
     <Row>
       <Col sm={4} smOffset={4}>
@@ -13,7 +13,14 @@ const WeatherTable = ({ weather }) => (
               weather.map((x) => {
                 const url = `/weather/${x.coord.lat}/${x.coord.lon}`;
                 const icon = `wi wi-owm-${x.weather[0].id}`;
-                const temp = Math.round(x.main.temp);
+                let units;
+                let temp = Math.round(x.main.temp);
+                if (celsius) {
+                  temp = parseInt((temp - 32) * (5 / 9), 10);
+                  units = 'C';
+                } else {
+                  units = `F`;
+                }
                 return (
                   <tr key={x.id}>
                     <td>
@@ -22,7 +29,7 @@ const WeatherTable = ({ weather }) => (
                         {' '}
                         <i className={icon} />
                         {' '}
-                        <span className="pull-right">{temp}&deg;F</span>
+                        <span className="pull-right">{temp}&deg;{units}</span>
                       </Link>
                     </td>
                   </tr>
@@ -38,6 +45,7 @@ const WeatherTable = ({ weather }) => (
 
 WeatherTable.propTypes = {
   weather: React.PropTypes.array.isRequired,
+  celsius: React.PropTypes.bool.isRequired,
 };
 
 export default WeatherTable;

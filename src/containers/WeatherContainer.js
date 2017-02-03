@@ -21,19 +21,18 @@ class WeatherContainer extends Component {
   }
 
   render() {
-    const { now, forecast, isFetching } = this.props;
+    const { now, forecast, isFetching, celsius } = this.props;
     if (now === null) {
       return false;
     }
-    const temp = Math.round(now.main.temp);
     const icon = now.weather[0].id;
     return (
       <div>
         <Navbar />
         { isFetching ? (<Loader />) : (
           <div>
-            <CurrentWeather current={now} temp={temp} icon={icon} />
-            <ForecastContainer forecast={forecast} days={5} />
+            <CurrentWeather current={now} icon={icon} celsius={celsius} />
+            <ForecastContainer forecast={forecast} days={5} celsius={celsius} />
           </div>
         )}
       </div>
@@ -47,15 +46,17 @@ WeatherContainer.propTypes = {
   now: React.PropTypes.object,
   forecast: React.PropTypes.array,
   params: React.PropTypes.object,
+  celsius: React.PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
-  const { now, forecast, location, isFetching } = state.weather;
+  const { now, forecast, location, isFetching, celsius } = state.weather;
   return {
     now,
     forecast,
     location,
     isFetching,
+    celsius,
   };
 }
 

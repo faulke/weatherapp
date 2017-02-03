@@ -14,12 +14,12 @@ class WeatherTableContainer extends Component {
   }
 
   render() {
-    const { tableWeather } = this.props;
+    const { celsius, tableWeather } = this.props;
     if (tableWeather === null) {
       return false;
     }
     return (
-      <WeatherTable weather={tableWeather} />
+      <WeatherTable weather={tableWeather} celsius={celsius} />
     );
   }
 }
@@ -28,13 +28,15 @@ WeatherTableContainer.propTypes = {
   shouldFetchWeatherMultiple: React.PropTypes.func,
   table: React.PropTypes.array,
   tableWeather: React.PropTypes.array,
+  celsius: React.PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
-  const { isFetching, tableWeather } = state.weather;
+  const { isFetching, tableWeather, celsius } = state.weather;
   return {
     isFetching,
     tableWeather,
+    celsius,
   };
 }
 
