@@ -41,7 +41,7 @@ export function getLocation() {
         if (!lat || !long) {
           dispatch(setTableLocations(55, -117));
         }
-      }, 500);
+      }, 2000);
     }
   };
 }
