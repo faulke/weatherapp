@@ -6,7 +6,7 @@ import api from '../api/index';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
 import Loader from '../components/common/Loader';
-import { getLocation, setTableLocations, setLocation } from '../actions/index';
+import { getLocation } from '../actions/index';
 
 class HomePage extends Component {
 
@@ -14,32 +14,29 @@ class HomePage extends Component {
     this.props.getLocation();
   }
 
-// TODO: user can save 3 specific locations that pop up when logged in
   render() {
-    if (this.props.table[0].lat == null) {
-      return <Loader />;
-    }
+    const firstCity = this.props.table[0].lat;
     return (
       <div className="container-fluid">
         <Grid id="home-search">
-          <Col sm={4} smOffset={4} className="text-center">
-            <div className="main-icon mb30">
-              <i className="wi wi-day-sunny" />
-            </div>
-            <SearchContainer />
-          </Col>
+          <Row>
+            <Col sm={4} smOffset={4} className="text-center">
+              <div className="main-icon mb30">
+                <i className="wi wi-day-sunny" />
+              </div>
+              <SearchContainer />
+            </Col>
+          </Row>
         </Grid>
-        <WeatherTableContainer table={this.props.table} />
+        {firstCity ? (<WeatherTableContainer table={this.props.table} />) :
+          (<Loader />)}
       </div>
     );
   }
 }
 
 HomePage.propTypes = {
-  location: React.PropTypes.object,
   getLocation: React.PropTypes.func,
-  setLocation: React.PropTypes.func.isRequired,
-  setTableLocations: React.PropTypes.func.isRequired,
   table: React.PropTypes.array,
 };
 
@@ -52,8 +49,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setTableLocations: (lat, long) => dispatch(setTableLocations(lat, long)),
-    setLocation: (lat, long) => dispatch(setLocation(lat, long)),
     getLocation: () => dispatch(getLocation()),
   };
 }
