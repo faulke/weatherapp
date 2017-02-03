@@ -23,9 +23,10 @@ class ForecastContainer extends Component {
   }
 
   render() {
+    const { forecast, celsius } = this.props;
     return (
       <Grid>
-        <Forecast data={this.props.forecast} days={this.getDays()} />
+        <Forecast data={forecast} days={this.getDays()} celsius={celsius} />
       </Grid>
     );
   }
@@ -34,6 +35,7 @@ class ForecastContainer extends Component {
 ForecastContainer.propTypes = {
   days: React.PropTypes.number.isRequired,
   forecast: React.PropTypes.array.isRequired,
+  celsius: React.PropTypes.bool.isRequired,
 };
 
 export default ForecastContainer;

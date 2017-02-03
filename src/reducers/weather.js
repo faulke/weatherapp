@@ -7,6 +7,7 @@ import {
   RECEIVE_WEATHER_MULTIPLE, 
   SET_LOCATION, 
   SET_TABLE,
+  UPDATE_UNITS,
 } from '../actions';
 
 export const initialState = {
@@ -24,7 +25,9 @@ export const initialState = {
   forecast: null,
   tableWeather: null,
   isFetching: false,
-  celsius: false,  
+  fahrActive: true,
+  celsActive: false,
+  celsius: false,
 };
 
 export const weather = (state = initialState, action) => {
@@ -63,6 +66,8 @@ export const weather = (state = initialState, action) => {
           long: action.long,
         }, state.table[1], state.table[2]],
       };
+    case UPDATE_UNITS:
+      return { ...state, celsius: action.celsius };
     default:
       return state;
   }
