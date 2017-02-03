@@ -89,8 +89,15 @@ export const receiveWeatherMultiple = (tableWeather) => ({
   tableWeather,
 });
 
-export function getWeatherMultiple(locations) {
+export const REQUEST_WEATHER_MULTIPLE = 'REQUEST_WEATHER_MULTIPLE';
+export const requestWeatherMultiple = (tableWeather) => ({
+  type: REQUEST_WEATHER_MULTIPLE,
+  tableWeather,
+});
+
+export function shouldFetchWeatherMultiple(locations) {
   return (dispatch) => {
+    dispatch(requestWeatherMultiple());
     return api.weather.getMultiple(locations, (err, res) => {
       if (err) {
         console.error(err);

@@ -22,15 +22,20 @@ class WeatherContainer extends Component {
 
   render() {
     const { now, forecast, isFetching } = this.props;
-    const temp = Math.round(this.props.now.main.temp);
-    const icon = this.props.now.weather[0].id;
+    if (now === null) {
+      return false;
+    }
+    const temp = Math.round(now.main.temp);
+    const icon = now.weather[0].id;
     return (
       <div>
         <Navbar />
-        <Loader loading={isFetching}>
-          <CurrentWeather current={this.props.now} temp={temp} icon={icon} />
-          <ForecastContainer forecast={this.props.forecast} days={5} /> {/* TODO later: make days dynamic */}
-        </Loader>
+        { isFetching ? (<Loader />) : (
+          <div>
+            <CurrentWeather current={now} temp={temp} icon={icon} />
+            <ForecastContainer forecast={forecast} days={5} />
+          </div>
+        )}
       </div>
     );
   }

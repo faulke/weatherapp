@@ -25,13 +25,14 @@ class SearchContainer extends Component {
   }
 
   render() {
+    const { place, input, size } = this.props;
     return (
       <Search 
-        place={this.props.place} 
-        value={this.props.input} 
+        place={place} 
+        value={input} 
         onSubmit={this.submitForm} 
         onChange={this.updateInput} 
-        size={this.props.size} 
+        size={size}
       />
     );
   }
