@@ -6,12 +6,23 @@ import api from '../api/index';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
 import Loader from '../components/common/Loader';
-import { getLocation } from '../actions/index';
+import Footer from '../components/common/Footer';
+import { getLocation, unitsToggle } from '../actions/index';
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleUnitsToggle = this.handleUnitsToggle.bind(this);
+  }
 
   componentDidMount() {
     this.props.getLocation();
+  }
+
+  handleUnitsToggle(evt) {
+    const id = evt.target.id;
+    this.props.unitsToggle(id);
   }
 
   render() {
@@ -30,6 +41,7 @@ class HomePage extends Component {
         </Grid>
         {firstCity ? (<WeatherTableContainer table={this.props.table} />) :
           (<Loader />)}
+        <Footer onClick={this.handleUnitsToggle} />
       </div>
     );
   }
@@ -38,18 +50,21 @@ class HomePage extends Component {
 HomePage.propTypes = {
   getLocation: React.PropTypes.func,
   table: React.PropTypes.array,
+  unitsToggle: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
-  const { table } = state.weather;
+  const { table, celsius } = state.weather;
   return {
     table,
+    celsius,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getLocation: () => dispatch(getLocation()),
+    unitsToggle: id => dispatch(unitsToggle(id)),
   };
 }
 
