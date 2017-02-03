@@ -4,6 +4,7 @@ import Navbar from '../components/common/Navbar';
 import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
 import Loader from '../components/common/Loader';
+import Footer from '../components/common/Footer';
 import { shouldFetchWeather } from '../actions/index';
 
 class WeatherContainer extends Component {
@@ -35,6 +36,7 @@ class WeatherContainer extends Component {
             <ForecastContainer forecast={forecast} days={5} celsius={celsius} />
           </div>
         )}
+        <Footer />
       </div>
     );
   }
