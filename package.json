@@ -83,6 +83,7 @@
   },
   "devDependencies": {
     "babel-preset-react-hmre": "1.1.1",
+    "deep-freeze": "0.0.1",
     "enzyme": "2.2.0",
     "eslint": "2.9.0",
     "eslint-config-airbnb": "^13.0.0",
