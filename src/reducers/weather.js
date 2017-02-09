@@ -16,7 +16,7 @@ export const initialState = {
     { lat: 45, long: -113 },
     { lat: 47, long: -113 },
   ],
-  search: '',
+  search: undefined,
   location: {
     lat: null,
     long: null,

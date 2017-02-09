@@ -7,14 +7,23 @@
     "dev": "npm-run-all --parallel open:src test:watch",
     "prod": "babel-node tools/distServer.js",
     "open:src": "babel-node tools/srcServer.js",
-    "test": "mocha --reporter progress tools/testSetup.js src/**/*.test.js",
-    "test:watch": "npm run test -- --watch",
+    "test": "jest",
+    "test:teamcity": "jest --teamcity",
+    "test:watch": "npm test -- --watch",
+    "test:coverage": "npm test -- --coverage",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all clean-dist build:html",
     "build": "babel-node tools/build.js",
     "heroku-postbuild": "npm run build"
+  },
+  "jest": {
+    "testResultsProcessor": "./node_modules/jest-teamcity-reporter",
+    "testEnvironment": "node",
+    "testPathDirs": [
+      "<rootDir>"
+    ]
   },
   "repository": {
     "type": "git",
@@ -74,11 +83,15 @@
   },
   "devDependencies": {
     "babel-preset-react-hmre": "1.1.1",
+    "deep-freeze": "0.0.1",
     "enzyme": "2.2.0",
     "eslint": "2.9.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "1.6.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "5.0.1"
+    "eslint-plugin-react": "5.0.1",
+    "expect": "^1.19.0",
+    "jest": "^18.1.0",
+    "jest-teamcity-reporter": "^0.4.0"
   }
 }
