@@ -3,7 +3,9 @@ React-Redux weather app that retrieves current weather and 5 day forecast for us
 
 Uses [OpenWeatherMap API](https://openweathermap.org/) and [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro).
 
-## Run locally
+### See the live app here: https://guarded-tor-95941.herokuapp.com/
+
+## To run locally
 - Clone the repo
 - `npm install`
 - Get an OpenWeatherMap API key **[here](http://openweathermap.org/appid)**.
