@@ -39,7 +39,7 @@ export function getLocation() {
       });
       setTimeout(() => {
         if (!lat || !long) {
-          dispatch(setTableLocations(55, -117));
+          dispatch(setTableLocations(47.6062, -122.3321));
         }
       }, 2000);
     }

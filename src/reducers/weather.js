@@ -13,8 +13,8 @@ import {
 export const initialState = {
   table: [
     { lat: null, long: null },
-    { lat: 45, long: -113 },
-    { lat: 47, long: -113 },
+    { lat: 40.7128, long: -74.0059 },
+    { lat: 39.7392, long: -104.9903 },
   ],
   search: undefined,
   location: {
