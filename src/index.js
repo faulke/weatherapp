@@ -7,10 +7,8 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import '../node_modules/jquery/dist/jquery.min';
 import '../node_modules/bootstrap/dist/js/bootstrap.min';
-import './styles/styles.css';
 import './styles/weather-icons.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/toastr/build/toastr.min.css';
 
 const store = configureStore();
 
