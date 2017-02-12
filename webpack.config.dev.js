@@ -8,16 +8,18 @@ export default {
   debug: true,
   devtool: 'cheap-module-eval-source-map',
   noInfo: false,
-  entry: [
-    'eventsource-polyfill', // necessary for hot reloading with IE
-    'webpack-hot-middleware/client?reload=true', // note that it reloads the page if hot module reloading fails.
-    './src/index',
-  ],
+  entry: {
+    weather_js: [
+      'eventsource-polyfill', // necessary for hot reloading with IE
+      'webpack-hot-middleware/client?reload=true',
+      path.resolve(__dirname, 'src/index.js'), // note that it reloads the page if hot module reloading fails.
+    ],
+  },
   target: 'web',
   output: {
     path: `${__dirname}/dist`, // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   devServer: {
     contentBase: './src',
@@ -45,6 +47,12 @@ export default {
     loaders: [
       { test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel'] },
       { test: /(\.css)$/, loaders: ['style', 'css'] },
+      {
+        test: /\.less$/,
+        // Use local CSS modules
+        loaders: ['style?insertAt=top', 'css?sourceMap&modules&importLoaders=1', 'less-loader?sourceMap'],
+        include: path.resolve(__dirname, 'src'),
+      },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000' },
