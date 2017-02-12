@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router';
 import SearchContainer from '../../containers/SearchContainer';
+import styles from './navbar.less';
 
 const NavbarInstance = () =>
   <Navbar inverse fluid collapseOnSelect>

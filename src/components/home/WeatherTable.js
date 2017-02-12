@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
+import styles from './weatherTable.less';
 
 // TODO: implement google autocomplete for addresses
 const WeatherTable = ({ celsius, weather }) => (
@@ -23,7 +24,7 @@ const WeatherTable = ({ celsius, weather }) => (
                 }
                 return (
                   <tr key={x.id}>
-                    <td>
+                    <td className={styles.link}>
                       <Link to={url}>
                         <span>{x.name}</span>
                         {' '}

@@ -1,0 +1,26 @@
+.forecast {
+    margin-top: 20px;
+    text-align: center;
+
+    .forecastDay {
+        width: 16%;
+        display: inline-block;
+        border: 1px solid black;
+        margin-bottom: 40px;
+        margin-right: 2%;
+        margin-left: 2%;
+
+        @media only screen and (max-width: 768px) {
+            display: block;
+            width: 96%;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .forecastDay{
+        display: block;
+        width: 96%;
+    }
+}
+
