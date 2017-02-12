@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import styles from './homePage.less';
 import api from '../api/index';
 import SearchContainer from './SearchContainer';
 import WeatherTableContainer from './WeatherTableContainer';
@@ -29,10 +30,10 @@ class HomePage extends Component {
     const firstCity = this.props.table[0].lat;
     return (
       <div className="container-fluid">
-        <Grid id="home-search">
+        <Grid className={styles.homeSearch}>
           <Row>
             <Col sm={4} smOffset={4} className="text-center">
-              <div className="main-icon mb30">
+              <div className={styles.mainIcon}>
                 <i className="wi wi-day-sunny" />
               </div>
               <SearchContainer />
