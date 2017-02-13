@@ -1,13 +1,16 @@
 html, body {
     height: 100%;
-    overflow: scroll;
+    overflow: auto;
     min-width: 290px;
     background: #00c3ff;
     background: -webkit-linear-gradient(to right, #00c3ff, #ffff1c);
     background: linear-gradient(to right, #00c3ff, #ffff1c);
     background-size: cover;
     background-repeat: no-repeat;
-    margin-bottom: 60px;
+           
+    @media only screen and (max-height: 600px) {
+        margin-bottom: 60px;
+    }
 
     .homeSearch {
         margin-top: 60px;
