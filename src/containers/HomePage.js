@@ -34,7 +34,7 @@ class HomePage extends Component {
           <Row>
             <Col sm={4} smOffset={4} className="text-center">
               <div className={styles.mainIcon}>
-                <i className="wi wi-day-sunny" />
+                <i className="wi wi-day-cloudy-windy" />
               </div>
               <SearchContainer />
             </Col>
