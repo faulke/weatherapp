@@ -1,13 +1,91 @@
-.link {
-    padding: 0 !important;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:700|Russo+One');
 
-    & > a {
-        color: black;
-        display: block;
-        padding: 5px;
+.weatherTable {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    border: none !important;
+    font-family: 'Noto Sans', sans-serif;
+
+    .tableRow {
+        border-spacing: 0 2em;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+            background-color:	rgba(0, 0, 0, 0.15);
+        }
+
+        .link {
+            padding: 0 !important;
+            height: 75px;
+            border-radius: 5px;
+            border-color: black;
+
+            & > a {
+                color: black;
+                display: block;
+                padding: 5px;
+            }
+
+            & > a:link {
+                text-decoration: none;
+            }
+        }
+
+        span, i {
+            font-size: 2em;
+            line-height: 75px;
+
+            @media only screen and (max-width: 480px) {
+                height: 25px;
+                font-size: 1.5em;
+                line-height: 35px;
+            }
+        }
+
+        .weather {
+            float: right;
+            width: 110px;
+
+            @media only screen and (max-width: 480px) {
+                float: none;
+                width: 75px;
+
+                span, i {
+                    font-size: 18px;
+                }
+            }
+
+        }
+
+        .temp {
+            float: right;
+            font-family: 'Russo One', sans-serif;
+        }
+
+        .arrow {
+            float: right;
+            line-height: 65px;
+            margin-right: 8px;
+
+            @media only screen and (min-width: 480px) {
+                display: none;
+            }
+        }    
     }
 
-    & > a:link {
-        text-decoration: none;
+    .link {
+        padding: 0 !important;
+
+        & > a {
+            color: black;
+            display: block;
+            padding: 5px;
+        }
+
+        & > a:link {
+            text-decoration: none;
+        }
     }
+
 }

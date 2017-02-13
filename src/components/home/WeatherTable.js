@@ -7,8 +7,8 @@ import styles from './weatherTable.less';
 const WeatherTable = ({ celsius, weather }) => (
   <Grid>
     <Row>
-      <Col sm={4} smOffset={4}>
-        <Table bordered condensed hover className="weather-table">
+      <Col xs={12} sm={8} smOffset={2} md={6} mdOffset={3} lg={6} lgOffset={3}>
+        <Table bordered condensed hover className={styles.weatherTable}>
           <tbody>
             {
               weather.map((x) => {
@@ -23,14 +23,15 @@ const WeatherTable = ({ celsius, weather }) => (
                   units = `F`;
                 }
                 return (
-                  <tr key={x.id}>
+                  <tr key={x.id} className={styles.tableRow}>
                     <td className={styles.link}>
                       <Link to={url}>
                         <span>{x.name}</span>
-                        {' '}
-                        <i className={icon} />
-                        {' '}
-                        <span className="pull-right">{temp}&deg;{units}</span>
+                        <span className={`fa fa-arrow-circle-right ${styles.arrow}`} />
+                        <div className={styles.weather}>
+                          <i className={icon} />
+                          <span className={styles.temp}>{temp}&deg;{units}</span>
+                        </div>
                       </Link>
                     </td>
                   </tr>
