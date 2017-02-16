@@ -16,7 +16,7 @@ const CurrentWeather = ({ current, icon, celsius }) => {
   }
 
   return (
-    <Grid>
+    <Grid className={styles.currentWeather}>
       <Row className={styles.mainCity}>
         <Col xs={6} xsOffset={3}>
           <h1>{current.name}</h1>
