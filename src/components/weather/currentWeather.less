@@ -3,12 +3,20 @@
 .currentWeather {
     font-family: 'Noto Sans', sans-serif;
 
-    .mainCity {
+    .cityRow {
         margin-bottom: 20px;
         text-align: center;
+
+        @media only screen and (max-height: 730px) {
+            margin-bottom: 0px;
+        }
+
+        .cityName {
+            font-size: 30px;
+        }
     }
 
-    .mainWeather {
+    .weatherRow {
         margin: 0px 80px 0px !important;
         text-align: center;
 
@@ -16,17 +24,39 @@
             margin-top: 15px;
         }
 
-        .mainTemp {
-            font-family: 'Russo One', sans-serif;
-            margin-top: 0px !important;
+        .tempContainer {
+
+            .temp {
+                display: block;
+                font-family: 'Russo One', sans-serif;
+                font-size: 35px;
+                margin-top: 0px !important;
+            }
+
+            @media only screen and (max-height: 675px) {
+                display: inline-block;
+            }
         }
 
-        .mainIcon {
-            font-size: 50px;
+        .descriptionContainer {
+            .icon {
+                display: block;
+                font-size: 60px;
+            }
+
+            .description {
+                display: block;
+                font-size: 20px;
+                margin-top: 10px
+            }
+
+            @media only screen and (max-height: 675px) {
+                display: inline-block;
+            }
         }
 
         @media only screen and (max-width: 768px) {
-            margin: 0px 15px 0px;
+            margin: 0px 15px 0px !important;
         }
     }
 }

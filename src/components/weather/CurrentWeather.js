@@ -17,19 +17,21 @@ const CurrentWeather = ({ current, icon, celsius }) => {
 
   return (
     <Grid className={styles.currentWeather}>
-      <Row className={styles.mainCity}>
-        <Col xs={6} xsOffset={3}>
-          <h1>{current.name}</h1>
+      <Row className={styles.cityRow}>
+        <Col xs={12} xsOffset={0}>
+          <span className={styles.cityName}>{current.name}</span>
         </Col>
       </Row>
-      <Row className={styles.mainWeather}>
-        <Col sm={2} smOffset={4}>
-          <i className={`${iconClass} ${styles.mainIcon}`} />
-          <h4>{description}</h4>
-        </Col>
-        <Col sm={2}>
-          <h1 className={styles.mainTemp}>{temp}&deg;{units}</h1>
-          <span><h5>Wind</h5><h6>{wind} mph</h6></span>
+      <Row className={styles.weatherRow}>
+        <Col sm={4} smOffset={4} xs={12} xsOffset={0}>
+          <div className={styles.descriptionContainer}>
+            <i className={`${iconClass} ${styles.icon}`} />
+            <span className={styles.description}>{description}</span>
+          </div>
+          <div className={styles.tempContainer}>
+            <span className={styles.temp}>{temp}&deg;{units}</span>
+            <span className={styles.wind}><h5>Wind</h5><h6>{wind} mph</h6></span>
+          </div>
         </Col>
       </Row>
     </Grid>
