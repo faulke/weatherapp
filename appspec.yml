@@ -5,7 +5,7 @@ files:
     destination: /home/ec2-user/weatherapp
 hooks:
   BeforeInstall:
-    - location/: /scripts/before_install.sh
+    - location: /scripts/before_install.sh
       runas: ec2-user
   AfterInstall:
     - location: /scripts/set_vars.sh
