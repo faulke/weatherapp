@@ -3,3 +3,11 @@ os: linux
 files:
   - source: /
   destination: /home/ec2-user/weatherapp
+hooks:
+  AfterInstall:
+    - location: /scripts/set_vars.sh
+    runas: ec2-user
+    - location: /scripts/app_start.sh
+    runas: ec2-user
+
+
