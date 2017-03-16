@@ -1,5 +1,5 @@
 #!/bin/bash
 cd /home/ec2-user/weatherapp/
-npm install
-npm run build
-npm run prod
+sudo npm install
+sudo npm run build
+sudo npm run prod
