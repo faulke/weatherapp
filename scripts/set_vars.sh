@@ -1,3 +1,7 @@
 #!/bin/bash
-cd /home/ec2-user/bin/
-./set_vars.sh
+export=%API_KEY%
+export=%GOOGLE_KEY%
+export=%PASSWORD%
+export=%SECRET_KEY%
+export=%USER%
+export=%WEATHER_KEY%
