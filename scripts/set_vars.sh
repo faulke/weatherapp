@@ -1,7 +1,7 @@
 #!/bin/bash
-export=%API_KEY%
-export=%GOOGLE_KEY%
-export=%PASSWORD%
-export=%SECRET_KEY%
-export=%USER%
-export=%WEATHER_KEY%
+export API_KEY="$API_KEY"
+export GOOGLE_KEY="$GOOGLE_KEY"
+export PASSWORD="$PASSWORD"
+export SECRET_KEY="$SECRET_KEY"
+export USER="$USER"
+export WEATHER_KEY="$WEATHER_KEY"
