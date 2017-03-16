@@ -2,6 +2,9 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production')
