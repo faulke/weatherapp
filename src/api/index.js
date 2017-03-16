@@ -4,7 +4,7 @@ import request from 'request';
 const weatherKey = process.env.WEATHER_KEY;
 const googleKey = process.env.GOOGLE_KEY;
 const hostName = process.env.NODE_ENV === 'production' ?
-  'https://guarded-tor-95941.herokuapp.com' :
+  'http://weather-elb-1682132239.us-west-2.elb.amazonaws.com' :
   'http://localhost:3000';
 
 const fetchJson = (url, callback) => {
