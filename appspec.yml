@@ -6,8 +6,8 @@ files:
 hooks:
   AfterInstall:
     - location: /scripts/set_vars.sh
-      runas: root
+      runas: ec2-user
     - location: /scripts/app_start.sh
-      runas: root
+      runas: ec2-user
 
 
