@@ -11,7 +11,7 @@ const fetchJson = (url, callback) => {
   request({
     url,
     auth: {
-      user: process.env.USER,
+      user: process.env.USERNAME,
       pass: process.env.PASSWORD,
     },
   }, (err, response, body) => {

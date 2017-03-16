@@ -36,7 +36,7 @@ export default {
       'process.env': {
         'WEATHER_KEY': `"${process.env.WEATHER_KEY}"`,
         'GOOGLE_KEY': `"${process.env.GOOGLE_KEY}"`,
-        'USER': `"${process.env.USER}"`,
+        'USER': `"${process.env.USERNAME}"`,
         'PASSWORD': `"${process.env.PASSWORD}"`,
         'SECRET_KEY': `"${process.env.SECRET_KEY}"`,
         'API_KEY': `"${process.env.API_KEY}"`,
