@@ -2,7 +2,9 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import dotenv from 'dotenv-webpack';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production')
@@ -50,14 +52,21 @@ export default {
     new ExtractTextPlugin('[name].[contenthash].css'),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
-    new dotenv({
-      path: './.env',
-      safe: 'false',
-    }),
     new webpack.ProvidePlugin({
       '$': 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+        'WEATHER_KEY': `"${process.env.WEATHER_KEY}"`,
+        'GOOGLE_KEY': `"${process.env.GOOGLE_KEY}"`,
+        'USER_NAME': `"${process.env.USER_NAME}"`,
+        'PASSWORD': `"${process.env.PASSWORD}"`,
+        'SECRET_KEY': `"${process.env.SECRET_KEY}"`,
+        'API_KEY': `"${process.env.API_KEY}"`,
+      },
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
