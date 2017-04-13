@@ -5,7 +5,7 @@ import favicon from 'serve-favicon';
 import api from './routes/api';
 import dotenv from 'dotenv';
 
-dotenv.config({path: '../.env'});
+dotenv.config();
 
 const port = process.env.PORT || 3000;
 const app = express();
