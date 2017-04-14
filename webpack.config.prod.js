@@ -60,12 +60,8 @@ export default {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
-        'WEATHER_KEY': `"${process.env.WEATHER_KEY}"`,
-        'GOOGLE_KEY': `"${process.env.GOOGLE_KEY}"`,
         'USER_NAME': `"${process.env.USER_NAME}"`,
         'PASSWORD': `"${process.env.PASSWORD}"`,
-        'SECRET_KEY': `"${process.env.SECRET_KEY}"`,
-        'API_KEY': `"${process.env.API_KEY}"`,
       },
     }),
     new HtmlWebpackPlugin({
