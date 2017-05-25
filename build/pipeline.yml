@@ -1,0 +1,12 @@
+resources:
+- name: weather
+  type: git
+  source:
+    uri: https://github.com/faulke/weatherapp.git
+
+jobs:
+- name: run-tests
+  plan:
+  - get: weather
+  - task: npm install
+    file: weather/build/install.yml

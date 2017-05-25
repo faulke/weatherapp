@@ -1,0 +1,15 @@
+# must specify platform
+platform: linux
+
+# docker image with node pre-installed
+image_resource:
+  type: docker-image
+  source:
+    repository: node
+    tag: 'latest'
+
+inputs:
+- name: weather
+
+run:
+  path: ./build/install.sh
