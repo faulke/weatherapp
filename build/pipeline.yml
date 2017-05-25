@@ -11,5 +11,5 @@ jobs:
   - get: weather
   - task: npm install
     file: weather/build/install.yml
-  - task:
+  - task: run tests
     file: weather/build/tests.yml
