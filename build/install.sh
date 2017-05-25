@@ -1,2 +1,2 @@
-#!/bin/bash
-sudo npm install
+#!/bin/sh
+npm install
