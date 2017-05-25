@@ -12,4 +12,5 @@ inputs:
 - name: weather
 
 run:
-  path: weather/build/install.sh
+  path: sh
+  args: ["weather/build/install.sh"]
