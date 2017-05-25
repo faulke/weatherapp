@@ -11,9 +11,6 @@ image_resource:
 inputs:
 - name: weather
 
-outputs:
-- name: weather
-
 run:
   path: sh
-  args: ["weather/build/install.sh"]
+  args: ["weather/build/tests.sh"]
