@@ -12,4 +12,4 @@ inputs:
 - name: weather
 
 run:
-  path: ./build/install.sh
+  path: weather/build/install.sh
