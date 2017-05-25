@@ -13,4 +13,4 @@ inputs:
 
 run:
   path: sh
-  args: ["weather-npm/build/tests.sh"]
+  args: ["build/tests.sh"]
