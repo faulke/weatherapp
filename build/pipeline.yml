@@ -3,6 +3,7 @@ resources:
   type: git
   source:
     uri: https://github.com/faulke/weatherapp.git
+    branch: concourse-pipeline
 
 jobs:
 - name: run-tests
