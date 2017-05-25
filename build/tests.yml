@@ -9,7 +9,7 @@ image_resource:
     tag: 'latest'
 
 inputs:
-- name: weather
+- name: weather-npm
 
 run:
   path: sh
