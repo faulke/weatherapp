@@ -10,6 +10,7 @@ image_resource:
 
 inputs:
 - name: weather
+  path: .
 
 outputs:
 - name: weather-npm
