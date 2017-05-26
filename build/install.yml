@@ -13,6 +13,7 @@ inputs:
 
 outputs:
 - name: weather-npm
+  path: weather
 
 run:
   path: sh
