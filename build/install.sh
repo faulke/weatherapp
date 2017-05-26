@@ -3,4 +3,4 @@ cd weather
 npm install
 cd ../
 ls
-cp -R weather/ weather-npm/
+cp -a weather/. weather-npm
