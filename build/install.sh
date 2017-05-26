@@ -1,3 +1,4 @@
 #!/bin/sh
 cd weather
-npm install > ../weather-npm
+npm install
+mv ../ ../weather-npm
