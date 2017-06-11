@@ -6,10 +6,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production')
-};
-
 export default {
   debug: true,
   devtool: 'source-map',
