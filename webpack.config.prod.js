@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production')
+  'process.env.NODE_ENV': `"${process.env.STAGE}"`
 };
 
 export default {
@@ -59,7 +59,7 @@ export default {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
+        'NODE_ENV': `"${process.env.STAGE}"`,
         'USER_NAME': `"${process.env.USER_NAME}"`,
         'PASSWORD': `"${process.env.PASSWORD}"`,
       },

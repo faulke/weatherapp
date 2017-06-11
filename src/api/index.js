@@ -3,9 +3,19 @@ import request from 'request';
 
 const weatherKey = process.env.WEATHER_KEY;
 const googleKey = process.env.GOOGLE_KEY;
-const hostName = process.env.NODE_ENV === 'production' ?
-  'https://simpleweather.us' :
-  'http://localhost:3000';
+let hostName;
+switch (process.env.STAGE) {
+  case 'production':
+    hostName = 'https://simpleweather.us';
+    break;
+
+  case 'staging':
+    hostName = 'https://staging.simpleweather.us';
+    break;
+  
+  default:
+    hostName = 'http://localhost:3000';
+}
 
 const fetchJson = (url, callback) => {
   request({

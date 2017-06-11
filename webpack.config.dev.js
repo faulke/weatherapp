@@ -40,6 +40,7 @@ export default {
         'PASSWORD': `"${process.env.PASSWORD}"`,
         'SECRET_KEY': `"${process.env.SECRET_KEY}"`,
         'API_KEY': `"${process.env.API_KEY}"`,
+        'STAGE': `"${process.env.STAGE}"`,
       },
     }),
   ],
