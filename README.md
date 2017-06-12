@@ -2,9 +2,9 @@
 React-Redux weather app that retrieves current weather and 5 day forecast for user's location.
 
 ## Description
-The biggest motivation for building this app was to learn front-end React implemented with the React-Redux methodology, but I also increased my knowledge of Express.js and routing, testing, setting up separate development and production environments, and deploying to Heroku.
+The biggest motivation for building this app was to learn front-end React implemented with the React-Redux methodology, but I also increased my knowledge of Express.js and routing, testing, setting up separate development and production environments, and deploying to immutable infrastructure.
 
-After the app was deployed and running on Heroku, I took it a step further and set up a continuous integration pipeline with tools such as TeamCity and Hashicorp's Packer, which deploys to an AWS Auto-Scaling group.  Much of the cloud infrastructure is managed using Terraform by Hashicorp.  Those scripts can be viewed in the [weather-infra](https://github.com/faulke/weather-infra) repo.
+After the app was originally deployed and running on Heroku, I took it a step further and set up a continuous integration pipeline with tools such as TeamCity and Hashicorp's Packer, which deploys to an AWS Auto-Scaling group.  Cloud infrastructure and deployment to immutable infrastructure is managed using Terraform by Hashicorp.  Those scripts can be viewed in the [weather-infra](https://github.com/faulke/weather-infra) repo.
 
 The app itself uses and [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro) to retrieve user locations and retrieve coordinates for searched locations. [OpenWeatherMap API](https://openweathermap.org/) is used to return weather for locations.
 
