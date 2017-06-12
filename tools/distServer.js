@@ -15,23 +15,11 @@ app.use(favicon(path.join(__dirname, '../src/favicon.ico')));
 
 app.use(express.static('dist'));
 
-const whitelist = ['https://staging.simpleweather.us', 'https://simpleweather.us']
+app.use(cors());
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
-app.use(cors(corsOptions));
+app.options('*', cors());
 
 app.use('/api', api);
-
-app.options('*', cors(corsOptions));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
