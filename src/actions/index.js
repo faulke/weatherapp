@@ -73,13 +73,14 @@ export const requestWeather = () => ({
 export function shouldFetchWeather(lat, long) {
   return (dispatch) => {
     dispatch(requestWeather());
-    return api.weather.get(lat, long, (err, res) => {
-      if (err) {
+    return api.weather.get(lat, long)
+      .then((res) => {
+        dispatch(receiveWeather(res.data))
+      })
+      .catch((err) => {
         console.error(err);
         return false;
-      }
-      dispatch(receiveWeather(res));
-    });
+      })
   };
 }
 
