@@ -43,7 +43,6 @@ class WeatherContainer extends Component {
         { isFetching ? (<Loader />) : (
           <div>
             <CurrentWeather current={now} icon={icon} celsius={celsius} />
-            <ForecastContainer forecast={forecast} days={5} celsius={celsius} />
           </div>
         )}
         <Footer onClick={this.handleUnitsToggle} />

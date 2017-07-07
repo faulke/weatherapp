@@ -41,8 +41,8 @@ export const weather = (state = initialState, action) => {
       return { ...state, isFetching: true };
     case RECEIVE_WEATHER:
       return { ...state,
-        now: action.weather[0],
-        forecast: action.weather[1].list,
+        now: action.weather,
+     //   forecast: action.weather[1].list,
         isFetching: false,
       };
     case REQUEST_WEATHER_MULTIPLE:
