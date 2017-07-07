@@ -1,0 +1,39 @@
+service: weather-api
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-2
+
+  environment: ${file(./serverless.env.yml)}
+
+package:
+  individually: true
+  exclude:
+    - lambda/**
+    - '*.spec.js'
+    - .env
+    - .gitignore
+    - .git/**
+    - '*.yml'
+    - .eslintrc
+
+plugins:
+  - serverless-plugin-include-dependencies
+
+functions:
+  weather:
+    handler: lambda/weather.handler
+    package:
+      include:
+        - lambda/weather.js
+    
+    events:
+      - http:
+          path: weather
+          method: get
+          cors: true
+          integration: lambda
+          request:
+            template:
+              application/json: '{"lat": "$input.params(''lat'')", "long": "$input.params(''long'')"}'
