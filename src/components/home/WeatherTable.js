@@ -13,7 +13,7 @@ const WeatherTable = ({ celsius, weather }) => (
             {
               weather.map((x) => {
                 const data = x.data;
-                const url = `/weather/${data.coord.lat}/${data.coord.lon}`;
+                const url = `/weather?lat=${data.coord.lat}&long=${data.coord.lon}`;
                 const icon = `wi wi-owm-${data.weather[0].id}`;
                 let units;
                 let temp = Math.round(data.main.temp);

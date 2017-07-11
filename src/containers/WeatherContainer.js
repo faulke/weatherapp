@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import Navbar from '../components/common/Navbar';
 import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
@@ -14,15 +15,15 @@ class WeatherContainer extends Component {
     this.handleUnitsToggle = this.handleUnitsToggle.bind(this);
   }
 
-  componentDidMount() {
-    const { lat, long } = this.props.params;
+  componentWillMount() {
+    const { lat, long } = browserHistory.getCurrentLocation().query;
     this.props.shouldFetchWeather(lat, long);
     this.props.shouldFetchForecast(lat, long);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.params !== nextProps.params) {
-      const { lat, long } = nextProps.params;
+    if (this.props.location !== nextProps.location) {
+      const { lat, long } = nextProps.location;
       nextProps.shouldFetchWeather(lat, long);
       nextProps.shouldFetchForecast(lat, long);
     }
@@ -60,7 +61,7 @@ WeatherContainer.propTypes = {
   isFetching: React.PropTypes.bool.isRequired,
   now: React.PropTypes.object,
   forecast: React.PropTypes.array,
-  params: React.PropTypes.object,
+  location: React.PropTypes.object,
   celsius: React.PropTypes.bool.isRequired,
   unitsToggle: React.PropTypes.func.isRequired,
 };
