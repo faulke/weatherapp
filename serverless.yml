@@ -10,6 +10,7 @@ provider:
 package:
   individually: true
   exclude:
+    - functions/**
     - lambda/**
     - '*.spec.js'
     - .env
@@ -31,6 +32,22 @@ functions:
     events:
       - http:
           path: weather
+          method: get
+          cors: true
+          integration: lambda
+          request:
+            template:
+              application/json: '{"lat": "$input.params(''lat'')", "long": "$input.params(''long'')"}'
+
+  forecast:
+    handler: lambda/forecast.handler
+    package:
+      include:
+        - lambda/forecast.js
+    
+    events:
+      - http:
+          path: forecast
           method: get
           cors: true
           integration: lambda
