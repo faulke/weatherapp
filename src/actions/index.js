@@ -2,7 +2,7 @@ import { browserHistory } from 'react-router';
 import api from '../api';
 
 export const UPDATE_SEARCH = 'UPDATE_SEARCH';
-export const updateSearch = (evt) => ({
+export const updateSearch = evt => ({
   type: UPDATE_SEARCH,
   input: evt.target.value,
 });
@@ -60,7 +60,7 @@ export function searchLocation(search) {
 }
 
 export const RECEIVE_WEATHER = 'RECEIVE_WEATHER';
-export const receiveWeather = (weather) => ({
+export const receiveWeather = weather => ({
   type: RECEIVE_WEATHER,
   weather,
 });
@@ -75,7 +75,7 @@ export function shouldFetchWeather(lat, long) {
     dispatch(requestWeather());
     return api.weather.get(lat, long)
       .then((res) => {
-        dispatch(receiveWeather(res.data))
+        dispatch(receiveWeather(res.data));
       })
       .catch((err) => {
         console.error(err);
@@ -85,13 +85,13 @@ export function shouldFetchWeather(lat, long) {
 }
 
 export const RECEIVE_WEATHER_MULTIPLE = 'RECEIVE_WEATHER_MULTIPLE';
-export const receiveWeatherMultiple = (tableWeather) => ({
+export const receiveWeatherMultiple = tableWeather => ({
   type: RECEIVE_WEATHER_MULTIPLE,
   tableWeather,
 });
 
 export const REQUEST_WEATHER_MULTIPLE = 'REQUEST_WEATHER_MULTIPLE';
-export const requestWeatherMultiple = (tableWeather) => ({
+export const requestWeatherMultiple = tableWeather => ({
   type: REQUEST_WEATHER_MULTIPLE,
   tableWeather,
 });
@@ -99,18 +99,44 @@ export const requestWeatherMultiple = (tableWeather) => ({
 export function shouldFetchWeatherMultiple(locations) {
   return (dispatch) => {
     dispatch(requestWeatherMultiple());
-    return api.weather.getMultiple(locations, (err, res) => {
-      if (err) {
+    return api.weather.getMultiple(locations)
+      .then((data) => {
+        dispatch(receiveWeatherMultiple(data));
+      })
+      .catch((err) => {
         console.error(err);
         return false;
-      }
-      dispatch(receiveWeatherMultiple(res));
-    });
+      });
+  };
+}
+
+export const RECEIVE_FORECAST = 'RECEIVE_FORECAST';
+export const receiveForecast = forecast => ({
+  type: RECEIVE_FORECAST,
+  forecast,
+});
+
+export const REQUEST_FORECAST = 'REQUEST_FORECAST';
+export const requestForecast = () => ({
+  type: REQUEST_FORECAST,
+});
+
+export function shouldFetchForecast(lat, long) {
+  return (dispatch) => {
+    dispatch(requestForecast());
+    return api.forecast.get(lat, long)
+      .then((res) => {
+        dispatch(receiveForecast(res.data.list));
+      })
+      .catch((err) => {
+        console.error(err);
+        return false;
+      });
   };
 }
 
 export const UPDATE_UNITS = 'UPDATE_UNITS';
-export const updateUnits = (celsius) => ({
+export const updateUnits = celsius => ({
   type: UPDATE_UNITS,
   celsius,
 });

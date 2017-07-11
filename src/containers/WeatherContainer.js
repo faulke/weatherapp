@@ -5,7 +5,7 @@ import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
 import Loader from '../components/common/Loader';
 import Footer from '../components/common/Footer';
-import { shouldFetchWeather, unitsToggle } from '../actions/index';
+import { shouldFetchWeather, shouldFetchForecast, unitsToggle } from '../actions/index';
 
 class WeatherContainer extends Component {
   constructor(props) {
@@ -17,12 +17,14 @@ class WeatherContainer extends Component {
   componentDidMount() {
     const { lat, long } = this.props.params;
     this.props.shouldFetchWeather(lat, long);
+    this.props.shouldFetchForecast(lat, long);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.params !== nextProps.params) {
       const { lat, long } = nextProps.params;
       nextProps.shouldFetchWeather(lat, long);
+      nextProps.shouldFetchForecast(lat, long);
     }
   }
 
@@ -33,7 +35,7 @@ class WeatherContainer extends Component {
 
   render() {
     const { now, forecast, isFetching, celsius } = this.props;
-    if (now === null) {
+    if (now === null || forecast === null) {
       return false;
     }
     const icon = now.weather[0].id;
@@ -43,6 +45,7 @@ class WeatherContainer extends Component {
         { isFetching ? (<Loader />) : (
           <div>
             <CurrentWeather current={now} icon={icon} celsius={celsius} />
+            <ForecastContainer forecast={forecast} days={5} celsius={celsius} />
           </div>
         )}
         <Footer onClick={this.handleUnitsToggle} />
@@ -53,6 +56,7 @@ class WeatherContainer extends Component {
 
 WeatherContainer.propTypes = {
   shouldFetchWeather: React.PropTypes.func.isRequired,
+  shouldFetchForecast: React.PropTypes.func.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
   now: React.PropTypes.object,
   forecast: React.PropTypes.array,
@@ -75,6 +79,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     shouldFetchWeather: (lat, long) => dispatch(shouldFetchWeather(lat, long)),
+    shouldFetchForecast: (lat, long) => dispatch(shouldFetchForecast(lat, long)),
     unitsToggle: id => dispatch(unitsToggle(id)),
   };
 }

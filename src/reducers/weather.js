@@ -4,7 +4,9 @@ import {
   REQUEST_WEATHER, 
   RECEIVE_WEATHER,
   REQUEST_WEATHER_MULTIPLE,
-  RECEIVE_WEATHER_MULTIPLE, 
+  RECEIVE_WEATHER_MULTIPLE,
+  REQUEST_FORECAST,
+  RECEIVE_FORECAST,
   SET_LOCATION, 
   SET_TABLE,
   UPDATE_UNITS,
@@ -42,7 +44,6 @@ export const weather = (state = initialState, action) => {
     case RECEIVE_WEATHER:
       return { ...state,
         now: action.weather,
-     //   forecast: action.weather[1].list,
         isFetching: false,
       };
     case REQUEST_WEATHER_MULTIPLE:
@@ -50,6 +51,13 @@ export const weather = (state = initialState, action) => {
     case RECEIVE_WEATHER_MULTIPLE:
       return { ...state,
         tableWeather: action.tableWeather,
+        isFetching: false,
+      };
+    case REQUEST_FORECAST:
+      return { ...state, isFetching: true };
+    case RECEIVE_FORECAST:
+      return { ...state,
+        forecast: action.forecast,
         isFetching: false,
       };
     case SET_LOCATION:

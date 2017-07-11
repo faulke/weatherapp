@@ -24,11 +24,11 @@ class ForecastContainer extends Component {
 
   render() {
     const { forecast, celsius } = this.props;
- /*   return (
+    return (
       <Grid>
         <Forecast data={forecast} days={this.getDays()} celsius={celsius} />
       </Grid>
-    ); */
+    );
   }
 }
 

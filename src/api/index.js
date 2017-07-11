@@ -7,24 +7,32 @@ const fetchJson = (uri) => {
   const options = { uri, json: true };
 
   return request(options);
-}
+};
 
 const getWeather = (lat, long) => {
   const uri = `${host}/weather?lat=${lat}&long=${long}`;
   return fetchJson(uri);
 };
 
-const getWeatherMultiple = (locations, cb) => {
-  const urls = locations.map(x => `${host}/weather?lat=${x.lat}&lon=${x.long}&units=imperial`);
-
-  async.map(urls, fetchJson, (err, results) => {
-    if (!err && results[0].cod === 200) {
-      cb(null, results);
-    } else {
-      cb(err);
-    }
+const getWeatherMultiple = (locations) => {
+  return new Promise((resolve, reject) => {
+    const promises = locations.map((x) => {
+      const uri = `${host}/weather?lat=${x.lat}&long=${x.long}`;
+      return fetchJson(uri);
+    });
+    return Promise.all(promises)
+      .then(data => resolve(data))
+      .catch((err) => {
+        console.log(err);
+        reject();
+      });
   });
 };
+
+const getForecast = (lat, long) => {
+  const uri = `${host}/forecast?lat=${lat}&long=${long}`;
+  return fetchJson(uri); 
+}
 
 const searchLocation = (search, cb) => {
   const url = `${host}/geocode?type=address&search=${search}`;
@@ -38,6 +46,9 @@ const api = {
   weather: {
     get: getWeather,
     getMultiple: getWeatherMultiple,
+  },
+  forecast: {
+    get: getForecast,
   },
   search: searchLocation,
 };

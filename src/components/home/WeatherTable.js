@@ -12,10 +12,11 @@ const WeatherTable = ({ celsius, weather }) => (
           <tbody>
             {
               weather.map((x) => {
-                const url = `/weather/${x.coord.lat}/${x.coord.lon}`;
-                const icon = `wi wi-owm-${x.weather[0].id}`;
+                const data = x.data;
+                const url = `/weather/${data.coord.lat}/${data.coord.lon}`;
+                const icon = `wi wi-owm-${data.weather[0].id}`;
                 let units;
-                let temp = Math.round(x.main.temp);
+                let temp = Math.round(data.main.temp);
                 if (celsius) {
                   temp = parseInt((temp - 32) * (5 / 9), 10);
                   units = 'C';
@@ -23,10 +24,10 @@ const WeatherTable = ({ celsius, weather }) => (
                   units = `F`;
                 }
                 return (
-                  <tr key={x.id} className={styles.tableRow}>
+                  <tr key={data.id} className={styles.tableRow}>
                     <td className={styles.link}>
                       <Link to={url}>
-                        <span>{x.name}</span>
+                        <span>{data.name}</span>
                         <span className={`fa fa-arrow-circle-right ${styles.arrow}`} />
                         <div className={styles.weather}>
                           <i className={icon} />
