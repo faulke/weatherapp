@@ -16,7 +16,6 @@ exports.handler = (event, context, callback) => {
       callback(null, response);
     })
     .catch((err) => {
-      console.log(err);
       callback(null, 'There was an error');
     });
 };
