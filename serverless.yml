@@ -54,3 +54,19 @@ functions:
           request:
             template:
               application/json: '{"lat": "$input.params(''lat'')", "long": "$input.params(''long'')"}'
+
+  search:
+    handler: lambda/search.handler
+    package:
+      include:
+        - lambda/search.js
+    
+    events:
+      - http:
+          path: search
+          method: get
+          cors: true
+          integration: lambda
+          request:
+            template:
+              application/json: '{"search": "$input.params(''search'')"}'
