@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import Navbar from '../components/common/Navbar';
 import CurrentWeather from '../components/weather/CurrentWeather';
 import ForecastContainer from './ForecastContainer';
 import Loader from '../components/common/Loader';
 import Footer from '../components/common/Footer';
-import { shouldFetchWeather, unitsToggle } from '../actions/index';
+import { shouldFetchWeather, shouldFetchForecast, unitsToggle } from '../actions/index';
 
 class WeatherContainer extends Component {
   constructor(props) {
@@ -14,15 +15,17 @@ class WeatherContainer extends Component {
     this.handleUnitsToggle = this.handleUnitsToggle.bind(this);
   }
 
-  componentDidMount() {
-    const { lat, long } = this.props.params;
+  componentWillMount() {
+    const { lat, long } = browserHistory.getCurrentLocation().query;
     this.props.shouldFetchWeather(lat, long);
+    this.props.shouldFetchForecast(lat, long);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.params !== nextProps.params) {
-      const { lat, long } = nextProps.params;
+    if (this.props.location !== nextProps.location) {
+      const { lat, long } = nextProps.location;
       nextProps.shouldFetchWeather(lat, long);
+      nextProps.shouldFetchForecast(lat, long);
     }
   }
 
@@ -33,7 +36,7 @@ class WeatherContainer extends Component {
 
   render() {
     const { now, forecast, isFetching, celsius } = this.props;
-    if (now === null) {
+    if (now === null || forecast === null) {
       return false;
     }
     const icon = now.weather[0].id;
@@ -54,10 +57,11 @@ class WeatherContainer extends Component {
 
 WeatherContainer.propTypes = {
   shouldFetchWeather: React.PropTypes.func.isRequired,
+  shouldFetchForecast: React.PropTypes.func.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
   now: React.PropTypes.object,
   forecast: React.PropTypes.array,
-  params: React.PropTypes.object,
+  location: React.PropTypes.object,
   celsius: React.PropTypes.bool.isRequired,
   unitsToggle: React.PropTypes.func.isRequired,
 };
@@ -76,6 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     shouldFetchWeather: (lat, long) => dispatch(shouldFetchWeather(lat, long)),
+    shouldFetchForecast: (lat, long) => dispatch(shouldFetchForecast(lat, long)),
     unitsToggle: id => dispatch(unitsToggle(id)),
   };
 }

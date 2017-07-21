@@ -1,63 +1,51 @@
 import async from 'async';
-import request from 'request';
+import request from 'request-promise';
 
-const hostName = process.env.NODE_ENV === 'production' ?
-  'https://simpleweather.us' : 'http://localhost:3000';
+const host = 'https://0d5xzqh159.execute-api.us-west-2.amazonaws.com/dev';
 
-const fetchJson = (url, callback) => {
-  request({
-    url,
-    auth: {
-      user: process.env.USER_NAME,
-      pass: process.env.PASSWORD,
-    },
-  }, (err, response, body) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, JSON.parse(body));
-    }
+const fetchJson = (uri) => {
+  const options = { uri, json: true };
+
+  return request(options);
+};
+
+const getWeather = (lat, long) => {
+  const uri = `${host}/weather?lat=${lat}&long=${long}`;
+  return fetchJson(uri);
+};
+
+const getWeatherMultiple = (locations) => {
+  return new Promise((resolve, reject) => {
+    const promises = locations.map((x) => {
+      const uri = `${host}/weather?lat=${x.lat}&long=${x.long}`;
+      return fetchJson(uri);
+    });
+    return Promise.all(promises)
+      .then(data => resolve(data))
+      .catch((err) => {
+        console.log(err);
+        reject();
+      });
   });
 };
 
-const getWeather = (lat, long, cb) => {
-  const urls = [
-    `${hostName}/api/weather?lat=${lat}&lon=${long}`,
-    `${hostName}/api/forecast?lat=${lat}&lon=${long}`];
-
-  async.map(urls, fetchJson, (err, results) => {
-    if (!err && results[0].cod === 200) {
-      cb(null, results);
-    } else {
-      cb(err);
-    }
-  });
-};
-
-const getWeatherMultiple = (locations, cb) => {
-  const urls = locations.map(x => `${hostName}/api/weather?lat=${x.lat}&lon=${x.long}&units=imperial`);
-
-  async.map(urls, fetchJson, (err, results) => {
-    if (!err && results[0].cod === 200) {
-      cb(null, results);
-    } else {
-      cb(err);
-    }
-  });
-};
+const getForecast = (lat, long) => {
+  const uri = `${host}/forecast?lat=${lat}&long=${long}`;
+  return fetchJson(uri); 
+}
 
 const searchLocation = (search, cb) => {
-  const url = `${hostName}/api/geocode?type=address&search=${search}`;
-  fetchJson(url, (err, res) => {
-    if (err) cb(err);
-    cb(null, res);
-  });
+  const uri = `${host}/search?search=${search}`;
+  return fetchJson(uri);
 };
 
 const api = {
   weather: {
     get: getWeather,
     getMultiple: getWeatherMultiple,
+  },
+  forecast: {
+    get: getForecast,
   },
   search: searchLocation,
 };
