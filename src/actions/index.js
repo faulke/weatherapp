@@ -48,14 +48,17 @@ export function getLocation() {
 
 export function searchLocation(search) {
   return (dispatch) => {
-    return api.search(search, (err, data) => {
-      if (!err && data.results.length) {
-        const lat = data.results[0].geometry.location.lat;
-        const long = data.results[0].geometry.location.lng;
+    return api.search(search)
+      .then((res) => {
+        const lat = res.data.results[0].geometry.location.lat;
+        const long = res.data.results[0].geometry.location.lng;
         dispatch(setLocation(lat, long));
-        browserHistory.push(`/weather/${lat}/${long}`);
-      }
-    });
+        browserHistory.push(`/weather?lat=${lat}&long=${long}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        return false;
+      });
   };
 }
 

@@ -35,11 +35,8 @@ const getForecast = (lat, long) => {
 }
 
 const searchLocation = (search, cb) => {
-  const url = `${host}/geocode?type=address&search=${search}`;
-  fetchJson(url, (err, res) => {
-    if (err) cb(err);
-    cb(null, res);
-  });
+  const uri = `${host}/search?search=${search}`;
+  return fetchJson(uri);
 };
 
 const api = {
