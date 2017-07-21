@@ -8,6 +8,8 @@ import {
   setTableLocations,
   requestWeather,
   receiveWeather,
+  requestForecast,
+  receiveForecast,
   requestWeatherMultiple,
   receiveWeatherMultiple,
   updateUnits,
@@ -106,18 +108,50 @@ describe('weather reducer', () => {
   it('should handle RECEIVE_WEATHER action', () => {
     const stateBefore = {
       now: null,
+      isFetching: true,
+    };
+
+    const data = { currentWeather: {} };
+
+    const action = receiveWeather(data);
+    const stateAfter = {
+      now: data,
+      isFetching: false,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(weather(stateBefore, action)).toEqual(stateAfter);
+  });
+
+    it('should handle REQUEST_FORECAST action', () => {
+    const stateBefore = {
+      isFetching: false,
+    };
+
+    const action = requestForecast();
+    const stateAfter = {
+      isFetching: true,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(weather(stateBefore, action)).toEqual(stateAfter);
+  });
+
+  it('should handle RECEIVE_FORECAST action', () => {
+    const stateBefore = {
       forecast: null,
       isFetching: true,
     };
 
-    const data = [
-      { currentWeather: {} },
-      { forecast: {} },
-    ];
-    const action = receiveWeather(data);
+    const data = [];
+
+    const action = receiveForecast(data);
     const stateAfter = {
-      now: data[0],
-      forecast: data[1].list,
+      forecast: data,
       isFetching: false,
     };
 
