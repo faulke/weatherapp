@@ -2,7 +2,7 @@ service: weather-api
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   region: us-west-2
 
   environment: ${file(./serverless.env.yml)}
