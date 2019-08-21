@@ -1,7 +1,7 @@
 # weatherapp
 Serverless, React-Redux weather app that retrieves current weather and 5 day forecast for user's location.
 
-### See the current live app here: https://simpleweather.us/
+### See the current live app here: https://elastic-mahavira-fc5f68.netlify.com
 
 ## Description
 The biggest motivation for building this app was to learn front-end React implemented with the React-Redux methodology, but I also enjoyed gaining greater depth in Express.js and routing, testing, setting up separate development and production environments, deploying to immutable infrastructure, and creating Serverless applications.
